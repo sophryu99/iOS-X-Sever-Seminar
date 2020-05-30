@@ -48,6 +48,8 @@
 		7F79F775247E6E9500B9FC56 /* RegularDeliveryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79F774247E6E9500B9FC56 /* RegularDeliveryCell.swift */; };
 		7F79F777247F7A8F00B9FC56 /* ProductInShoppingBasketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79F776247F7A8F00B9FC56 /* ProductInShoppingBasketCell.swift */; };
 		7F79F779247F7DB200B9FC56 /* ProductJH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79F778247F7DB200B9FC56 /* ProductJH.swift */; };
+		7FA31DFC248243EB0069625D /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA31DFB248243EB0069625D /* APIConstants.swift */; };
+		7FA31DFE248244500069625D /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA31DFD248244500069625D /* NetworkResult.swift */; };
 		AEBB68CC247E3AC400008A5C /* YJHome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEBB68CB247E3AC400008A5C /* YJHome.storyboard */; };
 		AEBB68CE247E3B0400008A5C /* YJHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB68CD247E3B0400008A5C /* YJHomeVC.swift */; };
 		AEBB68D6247F6ABA00008A5C /* ProductInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB68D5247F6ABA00008A5C /* ProductInfo.swift */; };
@@ -106,6 +108,8 @@
 		7F79F774247E6E9500B9FC56 /* RegularDeliveryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularDeliveryCell.swift; sourceTree = "<group>"; };
 		7F79F776247F7A8F00B9FC56 /* ProductInShoppingBasketCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInShoppingBasketCell.swift; sourceTree = "<group>"; };
 		7F79F778247F7DB200B9FC56 /* ProductJH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductJH.swift; sourceTree = "<group>"; };
+		7FA31DFB248243EB0069625D /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		7FA31DFD248244500069625D /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		AEBB68CB247E3AC400008A5C /* YJHome.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = YJHome.storyboard; sourceTree = "<group>"; };
 		AEBB68CD247E3B0400008A5C /* YJHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YJHomeVC.swift; sourceTree = "<group>"; };
 		AEBB68D5247F6ABA00008A5C /* ProductInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInfo.swift; sourceTree = "<group>"; };
@@ -244,6 +248,7 @@
 		7F79F745247A543B00B9FC56 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				7FA31DFA248243B80069625D /* APIService */,
 				7F79F746247A544400B9FC56 /* Storyboards */,
 				7F79F736247A53FC00B9FC56 /* Assets.xcassets */,
 			);
@@ -282,6 +287,15 @@
 				DA683CAE247D365300693333 /* BannerView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		7FA31DFA248243B80069625D /* APIService */ = {
+			isa = PBXGroup;
+			children = (
+				7FA31DFB248243EB0069625D /* APIConstants.swift */,
+				7FA31DFD248244500069625D /* NetworkResult.swift */,
+			);
+			path = APIService;
 			sourceTree = "<group>";
 		};
 		C240405E8EA9AA7B88B9ACBD /* Pods */ = {
@@ -433,6 +447,7 @@
 				DAF6DC8624812F42003AEEF0 /* InnerProductCollectionViewCell.swift in Sources */,
 				AEBB68D8247F71F400008A5C /* ProductCollectionViewCell1.swift in Sources */,
 				7F79F75C247A5B6500B9FC56 /* PersonalInfoVC.swift in Sources */,
+				7FA31DFC248243EB0069625D /* APIConstants.swift in Sources */,
 				011A54F4247A802A00DAC2D3 /* HomeSHVC.swift in Sources */,
 				010A5CAA247FEC180081CD0B /* RocketCellSH.swift in Sources */,
 				7F79F758247A5B3700B9FC56 /* CategoryVC.swift in Sources */,
@@ -451,6 +466,7 @@
 				7F79F72E247A53FB00B9FC56 /* AppDelegate.swift in Sources */,
 				01705491247F99F200FAE59B /* TodayCellSH.swift in Sources */,
 				AEBB68DA248133C200008A5C /* ProductCollectionViewCell2.swift in Sources */,
+				7FA31DFE248244500069625D /* NetworkResult.swift in Sources */,
 				7F79F730247A53FB00B9FC56 /* SceneDelegate.swift in Sources */,
 				7F79F75A247A5B4600B9FC56 /* SearchVC.swift in Sources */,
 				019FBC58247E329800A3FB2B /* CatCellSH.swift in Sources */,
