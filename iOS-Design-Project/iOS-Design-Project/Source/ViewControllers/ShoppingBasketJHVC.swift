@@ -9,18 +9,26 @@
 import UIKit
 
 class ShoppingBasketJHVC: UIViewController {
-
-
-    //MARK: Normal Property
+    
+    //MARK:- Normal Property
     var selectedTab: SelectedTapInShoppingCart = .normalPurchase
+    var myProductList: [ProductJH] = []
+    
     var rocketFreshProductList: [ProductJH] = []
     var rocketDeliveryProductList: [ProductJH] = []
     var normalProductList: [ProductJH] = []
     
     var itemCount: Int = 0
+    
+    //MARK:- IBOutlet
+    @IBOutlet var tableView: UITableView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setDummy()
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         //self.tableViewHeight.constant = 0
 
         // Do any additional setup after loading the view.
@@ -28,17 +36,16 @@ class ShoppingBasketJHVC: UIViewController {
     
     //MARK:- Custom Method
     func setDummy(){
-        self.rocketFreshProductList.append(ProductJH(category: .rocketDelivery, name: "123", imgStr: "123", priceStr: "!23"))
-        self.rocketFreshProductList.append(ProductJH(category: .rocketDelivery, name: "123", imgStr: "123", priceStr: "!23"))
-        self.rocketFreshProductList.append(ProductJH(category: .rocketDelivery, name: "123", imgStr: "123", priceStr: "!23"))
-        self.rocketFreshProductList.append(ProductJH(category: .rocketDelivery, name: "123", imgStr: "123", priceStr: "!23"))
-        self.rocketDeliveryProductList.append(ProductJH(category: .rocketDelivery, name: "123", imgStr: "123", priceStr: "!23"))
-        self.rocketDeliveryProductList.append(ProductJH(category: .rocketDelivery, name: "123", imgStr: "123", priceStr: "!23"))
-        self.rocketDeliveryProductList.append(ProductJH(category: .rocketDelivery, name: "123", imgStr: "123", priceStr: "!23"))
-        self.normalProductList.append(ProductJH(category: .rocketDelivery, name: "123", imgStr: "123", priceStr: "!23"))
-        self.normalProductList.append(ProductJH(category: .rocketDelivery, name: "123", imgStr: "123", priceStr: "!23"))
-        self.normalProductList.append(ProductJH(category: .rocketDelivery, name: "123", imgStr: "123", priceStr: "!23"))
-        self.itemCount = self.rocketDeliveryProductList.count + self.rocketFreshProductList.count + self.normalProductList.count
+        self.myProductList.append(ProductJH(category: .rocketDelivery, name: "123", imgStr: "123", priceStr: "!23"))
+        self.myProductList.append(ProductJH(category: .rocketDelivery, name: "123", imgStr: "123", priceStr: "!23"))
+        self.myProductList.append(ProductJH(category: .rocketDelivery, name: "123", imgStr: "123", priceStr: "!23"))
+        self.myProductList.append(ProductJH(category: .rocketFresh, name: "123", imgStr: "123", priceStr: "!23"))
+        self.myProductList.append(ProductJH(category: .rocketFresh, name: "123", imgStr: "123", priceStr: "!23"))
+        self.myProductList.append(ProductJH(category: .rocketFresh, name: "123", imgStr: "123", priceStr: "!23"))
+        self.myProductList.append(ProductJH(category: .rocketFresh, name: "123", imgStr: "123", priceStr: "!23"))
+        self.myProductList.append(ProductJH(category: .normalProduct, name: "123", imgStr: "123", priceStr: "!23"))
+        self.myProductList.append(ProductJH(category: .normalProduct, name: "123", imgStr: "123", priceStr: "!23"))
+        self.myProductList.append(ProductJH(category: .normalProduct, name: "123", imgStr: "123", priceStr: "!23"))
     }
 
     
@@ -48,37 +55,151 @@ class ShoppingBasketJHVC: UIViewController {
 }
 
 //MARK:- Extension TableView
+
+extension ShoppingBasketJHVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        
+        case 2, 3, 4:
+            return 68
+        case 5:
+            return 18
+        default:
+            return .leastNonzeroMagnitude
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+                switch section {
+        
+        case 2, 3, 4:
+            return .leastNonzeroMagnitude
+        default:
+            return .leastNonzeroMagnitude
+        }
+    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        let contentView = ShoppingBasketHeaderView(frame: CGRect(x: 0, y: 0, width: 375, height: 68))
+        switch section {
+        case 2:
+            contentView.cagetory = .rocketFresh
+        case 3:
+            contentView.cagetory = .rocketDelivery
+        case 4:
+            contentView.cagetory = .normalProduct
+        case 5:
+            let view = UIView()
+            view.frame = CGRect(x: 0, y: 0, width: 375, height: 18)
+            view.backgroundColor = UIColor(red: 248 / 255, green: 248 / 255, blue: 248 / 255, alpha: 1.0)
+            view.layer.borderWidth = 0.2
+        
+            return view
+        default:
+//            print(section)
+//            headerView.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+            return nil
+        }
+//        let height = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+//        var headerFrame = headerView.frame
+//        if height != headerFrame.size.height {
+//            headerFrame.size.height = height
+//            headerView.frame = headerFrame
+//            tableView.tableHeaderView = headerView
+//        }
+
+        
+        contentView.setBackgroundImageView()
+        contentView.setCategoryLabel()
+        contentView.setExtraPriceForPurchasing()
+        contentView.backgroundColor = UIColor.red
+        headerView.addSubview(contentView)
+        
+        return headerView
+    }
+}
 extension ShoppingBasketJHVC: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 6
     }
-    
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var rowNum: Int = 0
+        
         switch section {
         case 0:
-            rowNum = self.rocketFreshProductList.count
+            rowNum = 1
         case 1:
-            rowNum = self.rocketDeliveryProductList.count
+            rowNum = 1
         case 2:
-            rowNum = self.normalProductList.count
-            
+            rowNum = self.myProductList.filter{
+                $0.category == .rocketFresh
+            }.count
+        case 3:
+            rowNum = self.myProductList.filter{
+                $0.category == .rocketDelivery
+            }.count
+        case 4:
+            rowNum = self.myProductList.filter{
+                $0.category == .normalProduct
+            }.count
+        case 5:
+            rowNum = 2
         default:
             break
         }
-        
+
         return rowNum
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ProductInShoppingBasketCell.identifier) as? ProductInShoppingBasketCell else {
+
+        switch indexPath.section {
+        case 0:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: TabBarCellJH.identifier)
+                as? TabBarCellJH{
+                return cell
+            }
+        case 1:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: EditTabCellJH.identifier) as? EditTabCellJH{
+                return cell
+            }
+        case 2:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ProductInShoppingBasketCell.identifier) as? ProductInShoppingBasketCell {
+                
+                return cell
+            }
+        case 3:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ProductInShoppingBasketCell.identifier) as? ProductInShoppingBasketCell {
+                
+                return cell
+            }
+        case 4:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ProductInShoppingBasketCell.identifier) as? ProductInShoppingBasketCell {
+                
+                return cell
+            }
+        case 5:
+            print(indexPath.row)
+            if indexPath.row == 0 {
+                if let cell = tableView.dequeueReusableCell(withIdentifier: ProductPriceDetailCellJH.identifier) as? ProductPriceDetailCellJH {
+                    return cell
+                }
+            }
+            else {
+                if let cell = tableView.dequeueReusableCell(withIdentifier: ProductTotalPriceCellJH.identifier) as? ProductTotalPriceCellJH {
+                    return cell
+                }
+            }
+        default:
             return UITableViewCell()
         }
-        return cell
+        
+        return UITableViewCell()
     }
-    
 }
 
 // MARK:- Enum SelectedTapInShoppingCart

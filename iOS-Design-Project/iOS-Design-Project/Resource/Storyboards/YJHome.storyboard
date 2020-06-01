@@ -643,9 +643,9 @@
     </scenes>
     <resources>
         <image name="buttonMore" width="38" height="13"/>
-        <image name="buttonRoketdelivery" width="141" height="52"/>
-        <image name="buttonRoketfresh" width="141" height="52"/>
-        <image name="buttonRoketoversea" width="141" height="52"/>
+        <image name="buttonRoketdelivery" width="139" height="52"/>
+        <image name="buttonRoketfresh" width="139" height="52"/>
+        <image name="buttonRoketoversea" width="139" height="52"/>
         <image name="iconAlarm" width="22" height="22"/>
         <image name="iconRealtimeMore" width="13.666666984558105" height="7.6666665077209473"/>
         <image name="img1" width="93" height="121"/>

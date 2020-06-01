@@ -916,9 +916,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="buttonRoketdelivery" width="141" height="52"/>
-        <image name="buttonRoketfresh" width="141" height="52"/>
-        <image name="buttonRoketoversea" width="141" height="52"/>
+        <image name="buttonRoketdelivery" width="139" height="52"/>
+        <image name="buttonRoketfresh" width="139" height="52"/>
+        <image name="buttonRoketoversea" width="139" height="52"/>
         <image name="iconAlarm" width="22" height="22"/>
         <image name="iconRealtimeMore" width="13.5" height="7.5"/>
         <image name="logo" width="115" height="115"/>
