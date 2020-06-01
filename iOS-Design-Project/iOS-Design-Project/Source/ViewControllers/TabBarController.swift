@@ -89,6 +89,8 @@ class TabBarController: UITabBarController {
 //            return
 //        }
         let fifthTab = UIViewController()
+        fifthTab.tabBarItem.badgeColor = UIColor.systemBlue
+        fifthTab.tabBarItem.badgeValue = "2"
         fifthTab.tabBarItem.title = ""
         fifthTab.tabBarItem.image = UIImage(named: "iconCart")
         fifthTab.tabBarItem.selectedImage = UIImage(named: "iconCart")?.withRenderingMode(.alwaysTemplate)
