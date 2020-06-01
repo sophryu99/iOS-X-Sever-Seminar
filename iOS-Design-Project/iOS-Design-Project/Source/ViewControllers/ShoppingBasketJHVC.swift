@@ -76,7 +76,7 @@ extension ShoppingBasketJHVC: UITableViewDelegate {
                 switch section {
         
         case 2, 3, 4:
-            return .leastNonzeroMagnitude
+            return 55
         default:
             return .leastNonzeroMagnitude
         }
@@ -99,18 +99,8 @@ extension ShoppingBasketJHVC: UITableViewDelegate {
         
             return view
         default:
-//            print(section)
-//            headerView.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
             return nil
         }
-//        let height = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
-//        var headerFrame = headerView.frame
-//        if height != headerFrame.size.height {
-//            headerFrame.size.height = height
-//            headerView.frame = headerFrame
-//            tableView.tableHeaderView = headerView
-//        }
-
         
         contentView.setBackgroundImageView()
         contentView.setCategoryLabel()
@@ -119,6 +109,17 @@ extension ShoppingBasketJHVC: UITableViewDelegate {
         headerView.addSubview(contentView)
         
         return headerView
+    }
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = ShoppingBascketFooterView(frame: CGRect(x: 0, y: 0, width: 375, height: 55))
+        footerView.backgroundColor = .blue
+        switch section {
+        case 2, 3, 4:
+            break
+        default:
+            return nil
+        }
+        return footerView
     }
 }
 extension ShoppingBasketJHVC: UITableViewDataSource {

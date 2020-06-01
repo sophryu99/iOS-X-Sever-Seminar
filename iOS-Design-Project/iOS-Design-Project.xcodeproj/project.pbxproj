@@ -23,6 +23,8 @@
 		019FBC5E247EC8BA00A3FB2B /* RecCellSH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019FBC5D247EC8BA00A3FB2B /* RecCellSH.swift */; };
 		01C3F22D2480A9C2000FE197 /* PopularTitleCellSH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C3F22C2480A9C2000FE197 /* PopularTitleCellSH.swift */; };
 		5E3F4754A87AAED83496088C /* Pods_iOS_Design_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C0F648DD8311A44E00A50AA /* Pods_iOS_Design_Project.framework */; };
+		7F03AF052484EB35001353EF /* ShoppingBascketFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F03AF042484EB35001353EF /* ShoppingBascketFooterView.swift */; };
+		7F03AF072484F700001353EF /* UITabBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F03AF062484F700001353EF /* UITabBar+Extension.swift */; };
 		7F79F72E247A53FB00B9FC56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79F72D247A53FB00B9FC56 /* AppDelegate.swift */; };
 		7F79F730247A53FB00B9FC56 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79F72F247A53FB00B9FC56 /* SceneDelegate.swift */; };
 		7F79F732247A53FB00B9FC56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79F731247A53FB00B9FC56 /* ViewController.swift */; };
@@ -86,6 +88,8 @@
 		019FBC5D247EC8BA00A3FB2B /* RecCellSH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecCellSH.swift; path = "iOS-Design-Project/Source/ViewControllers/RecCellSH.swift"; sourceTree = SOURCE_ROOT; };
 		01C3F22C2480A9C2000FE197 /* PopularTitleCellSH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularTitleCellSH.swift; sourceTree = "<group>"; };
 		4C0F648DD8311A44E00A50AA /* Pods_iOS_Design_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_Design_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F03AF042484EB35001353EF /* ShoppingBascketFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingBascketFooterView.swift; sourceTree = "<group>"; };
+		7F03AF062484F700001353EF /* UITabBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBar+Extension.swift"; sourceTree = "<group>"; };
 		7F79F72A247A53FB00B9FC56 /* iOS-Design-Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Design-Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F79F72D247A53FB00B9FC56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F79F72F247A53FB00B9FC56 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -291,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				7F79F761247A652B00B9FC56 /* UIColor+Additions.swift */,
+				7F03AF062484F700001353EF /* UITabBar+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 			children = (
 				DA683CAE247D365300693333 /* BannerView.swift */,
 				7FA31E0D24838A240069625D /* ShoppingBasketHeaderView.swift */,
+				7F03AF042484EB35001353EF /* ShoppingBascketFooterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -453,6 +459,7 @@
 				7FA31E02248250E30069625D /* EditTabCellJH.swift in Sources */,
 				010A5CB024801EA50081CD0B /* PopularSH.swift in Sources */,
 				7F79F777247F7A8F00B9FC56 /* ProductInShoppingBasketCell.swift in Sources */,
+				7F03AF052484EB35001353EF /* ShoppingBascketFooterView.swift in Sources */,
 				7F79F75E247A5B7600B9FC56 /* ShoppingBasketExVC.swift in Sources */,
 				7F79F779247F7DB200B9FC56 /* ProductJH.swift in Sources */,
 				7F79F762247A652B00B9FC56 /* UIColor+Additions.swift in Sources */,
@@ -467,6 +474,7 @@
 				7F79F75C247A5B6500B9FC56 /* PersonalInfoVC.swift in Sources */,
 				7FA31E04248252F20069625D /* ProductPriceDetailCellJH.swift in Sources */,
 				7FA31DFC248243EB0069625D /* APIConstants.swift in Sources */,
+				7F03AF072484F700001353EF /* UITabBar+Extension.swift in Sources */,
 				011A54F4247A802A00DAC2D3 /* HomeSHVC.swift in Sources */,
 				010A5CAA247FEC180081CD0B /* RocketCellSH.swift in Sources */,
 				7F79F758247A5B3700B9FC56 /* CategoryVC.swift in Sources */,
