@@ -89,6 +89,9 @@ class TabBarController: UITabBarController {
 //            return
 //        }
         let fifthTab = UIViewController()
+//        fifthTab.tabBarItem.badgeColor = UIColor.systemBlue
+//        fifthTab.tabBarItem.badgeValue = "2"
+        
         fifthTab.tabBarItem.title = ""
         fifthTab.tabBarItem.image = UIImage(named: "iconCart")
         fifthTab.tabBarItem.selectedImage = UIImage(named: "iconCart")?.withRenderingMode(.alwaysTemplate)
@@ -98,6 +101,7 @@ class TabBarController: UITabBarController {
         
         // Set the ViewController.
         self.setViewControllers(tabs, animated: false)
+        tabBar.addItemBadge(atIndex: 4, num: 4)
         self.selectedViewController = thirdTab
     }
 
@@ -131,3 +135,5 @@ extension TabBarController: UITabBarControllerDelegate {
 
     }
 }
+
+
