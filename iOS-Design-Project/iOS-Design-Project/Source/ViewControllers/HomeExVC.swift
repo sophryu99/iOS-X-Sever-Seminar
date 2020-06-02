@@ -53,8 +53,6 @@ class HomeExVC: UIViewController {
     @IBAction func roketOverseaButton(_ sender: Any) {
         print("로켓직구 클릭")
     }
-    
-    
     ///카테고리 베너
     
     @IBOutlet weak var Category: UIView!
@@ -73,7 +71,7 @@ class HomeExVC: UIViewController {
         self.Category.layer.shadowColor = UIColor.black.cgColor
         self.CategoryCollectionView.tag = 1
         let layout = self.CategoryCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        let width = floor(self.view.frame.width / 5)-10
+        let width = floor(self.view.frame.width / 5)-8
         let height = width
         layout.itemSize = CGSize(width: width, height:height)
         
@@ -85,10 +83,13 @@ class HomeExVC: UIViewController {
     @IBOutlet weak var RankItemLabel: UILabel!
     var toggle:Bool = true
     @IBOutlet weak var buttonImg: UIButton!
+    @IBOutlet weak var Ranking: UIView!
     @IBAction func RankButton(_ sender: Any) {
+        
         if toggle {
+            self.RankingViewHeight.constant = self.Ranking.frame.size.height * 5
             UIView.animate(withDuration: 0.5, animations: {
-                self.RankingViewHeight.constant = 160
+                self.view.layoutIfNeeded()
             })
             buttonImg.setImage(UIImage(named: "iconRealtimeMore"), for: .normal)
             RankLabel.alpha = 0
@@ -96,9 +97,9 @@ class HomeExVC: UIViewController {
         }
         else {
             buttonImg.setImage(UIImage(named: "iconRealtimeMore2"), for: .normal)
-
+            self.RankingViewHeight.constant = 0
             UIView.animate(withDuration: 0.5, animations: {
-                self.RankingViewHeight.constant = 0
+                self.view.layoutIfNeeded()
             })
             RankLabel.alpha = 1
             RankItemLabel.alpha = 1
@@ -108,14 +109,13 @@ class HomeExVC: UIViewController {
     }
     
     
-    @IBOutlet weak var RankingCollectionView: UICollectionView!
     
     private func setRankInfo(){
-        RankingCollectionView.delegate = self
-        RankingCollectionView.dataSource = self
-        RankingCollectionView.tag = 3
-        let layout = RankingCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        let width = floor(self.RankingCollectionView.frame.width / 2)
+        //RankingCollectionView.delegate = self
+        //RankingCollectionView.dataSource = self
+        //RankingCollectionView.tag = 3
+        //let layout = RankingCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        //let width = floor(self.RankingCollectionView.frame.width)
         //layout.itemSize = CGSize(width: width, height: 16)
     }
     
@@ -147,7 +147,7 @@ class HomeExVC: UIViewController {
         setUpBannerView(item: 6)
         setCategoryInformation()
         setProductInformation()
-        setRankInfo()
+        //setRankInfo()
         collectionViewHeight.constant = ProductCollectionView.frame.height * 3
         // Do any additional setup after loading the view.
 
@@ -244,12 +244,15 @@ extension HomeExVC:UICollectionViewDataSource{
 }
 extension HomeExVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        if collectionView.tag == 1 {
+            return UIEdgeInsets(top: 0, left: 8,bottom: 0, right: 8)
+        }
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         if collectionView.tag == 1 {
-        return 10
+        return 8
         }
         else { return 0 }
     }
