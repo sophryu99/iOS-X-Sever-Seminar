@@ -57,6 +57,7 @@
 		7FA31E04248252F20069625D /* ProductPriceDetailCellJH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA31E03248252F20069625D /* ProductPriceDetailCellJH.swift */; };
 		7FA31E06248253590069625D /* ProductTotalPriceCellJH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA31E05248253590069625D /* ProductTotalPriceCellJH.swift */; };
 		7FA31E0E24838A240069625D /* ShoppingBasketHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA31E0D24838A240069625D /* ShoppingBasketHeaderView.swift */; };
+		7FB929912487A33300798CC2 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB929902487A33300798CC2 /* UIImageView+Extension.swift */; };
 		AEBB68CC247E3AC400008A5C /* YJHome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEBB68CB247E3AC400008A5C /* YJHome.storyboard */; };
 		AEBB68CE247E3B0400008A5C /* YJHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB68CD247E3B0400008A5C /* YJHomeVC.swift */; };
 		AEBB68D6247F6ABA00008A5C /* ProductInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB68D5247F6ABA00008A5C /* ProductInfo.swift */; };
@@ -124,6 +125,7 @@
 		7FA31E03248252F20069625D /* ProductPriceDetailCellJH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPriceDetailCellJH.swift; sourceTree = "<group>"; };
 		7FA31E05248253590069625D /* ProductTotalPriceCellJH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTotalPriceCellJH.swift; sourceTree = "<group>"; };
 		7FA31E0D24838A240069625D /* ShoppingBasketHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingBasketHeaderView.swift; sourceTree = "<group>"; };
+		7FB929902487A33300798CC2 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		AEBB68CB247E3AC400008A5C /* YJHome.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = YJHome.storyboard; sourceTree = "<group>"; };
 		AEBB68CD247E3B0400008A5C /* YJHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YJHomeVC.swift; sourceTree = "<group>"; };
 		AEBB68D5247F6ABA00008A5C /* ProductInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInfo.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 			children = (
 				7F79F761247A652B00B9FC56 /* UIColor+Additions.swift */,
 				7F03AF062484F700001353EF /* UITabBar+Extension.swift */,
+				7FB929902487A33300798CC2 /* UIImageView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 			files = (
 				011A54F8247AA00F00DAC2D3 /* AdsSH.swift in Sources */,
 				011A54F6247A9ECB00DAC2D3 /* AdCellSH.swift in Sources */,
+				7FB929912487A33300798CC2 /* UIImageView+Extension.swift in Sources */,
 				7FA31E06248253590069625D /* ProductTotalPriceCellJH.swift in Sources */,
 				7F79F75E247A5B7600B9FC56 /* ShoppingBasketExVC.swift in Sources */,
 				7FA31E02248250E30069625D /* EditTabCellJH.swift in Sources */,
