@@ -12,4 +12,12 @@ struct APIConstants {
     static let baseURL = ""
     
     // URL Info
+    // Items URL
+    static let itemsURL = APIConstants.baseURL + "/items"
+    static let itemsRecommandedURL = APIConstants.itemsURL + "/recommand"
+    static let itemsInBasketURL = APIConstants.itemsURL + "/basket"
+    static let itemsCountInBasketURL = APIConstants.itemsInBasketURL + "/count"
+    // Search URL
+    static let searchURL = APIConstants.baseURL + "/search"
+    
 }
