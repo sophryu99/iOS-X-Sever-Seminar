@@ -9,7 +9,7 @@
 import Foundation
 
 struct APIConstants {
-    static let baseURL = ""
+    static let baseURL = "http://ec2-3-34-36-2.ap-northeast-2.compute.amazonaws.com:3000"
     
     // URL Info
     // Items URL
