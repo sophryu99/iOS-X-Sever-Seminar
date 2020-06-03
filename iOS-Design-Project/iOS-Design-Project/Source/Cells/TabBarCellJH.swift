@@ -12,6 +12,11 @@ class TabBarCellJH: UITableViewCell {
     
     static let identifier = "TabBarCellJH"
 
+    @IBOutlet var tabNameLabel: UILabel!
+    
+    @IBOutlet var tabIndicatorView: UIView!
+    
+    @IBOutlet var indicatorHeightConstraint: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

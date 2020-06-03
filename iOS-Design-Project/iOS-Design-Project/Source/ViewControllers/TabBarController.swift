@@ -33,7 +33,7 @@ class TabBarController: UITabBarController {
         
         firstTab.tabBarItem.title = ""
         firstTab.tabBarItem.image = UIImage(named: "iconCategory")?.withRenderingMode(.alwaysOriginal)
-        firstTab.tabBarItem.selectedImage = UIImage(named: "iconCategory")?.withRenderingMode(.alwaysTemplate)
+        firstTab.tabBarItem.selectedImage = UIImage(named: "iconCategory2")?.withRenderingMode(.alwaysOriginal)
         print(#function)
         // Search Tab
         let searchStoryboard = UIStoryboard.init(name: "Search", bundle: nil)
@@ -44,7 +44,7 @@ class TabBarController: UITabBarController {
 
         secondTab.tabBarItem.title = ""
         secondTab.tabBarItem.image = UIImage(named: "iconSearch")?.withRenderingMode(.alwaysOriginal)
-        secondTab.tabBarItem.selectedImage = UIImage(named: "iconSearch")?.withRenderingMode(.alwaysTemplate)
+        secondTab.tabBarItem.selectedImage = UIImage(named: "iconSearch2")?.withRenderingMode(.alwaysOriginal)
         
         // Home Tab
         // 세화님 뷰
@@ -65,8 +65,9 @@ class TabBarController: UITabBarController {
             
 
         thirdTab.tabBarItem.title = ""
-        thirdTab.tabBarItem.image = UIImage.init(systemName: "house")
+        thirdTab.tabBarItem.image = UIImage(named: "iconHome")?.withRenderingMode(.alwaysOriginal)
         thirdTab.tabBarItem.selectedImage = UIImage(named: "iconHomeSelected")?.withRenderingMode(.alwaysOriginal)
+        
         // PersonalInfo Tab
         let personalInfoStoryboard = UIStoryboard.init(name: "PersonalInfo", bundle: nil)
         guard let fourthTab = personalInfoStoryboard.instantiateViewController(identifier: "PersonalInfoVC")
@@ -75,8 +76,8 @@ class TabBarController: UITabBarController {
         }
 
         fourthTab.tabBarItem.title = ""
-        fourthTab.tabBarItem.image = UIImage(named: "iconMy")
-        fourthTab.tabBarItem.selectedImage = UIImage(named: "iconMy")?.withRenderingMode(.alwaysTemplate)
+        fourthTab.tabBarItem.image = UIImage(named: "iconMy")?.withRenderingMode(.alwaysOriginal)
+        fourthTab.tabBarItem.selectedImage = UIImage(named: "iconMy2")?.withRenderingMode(.alwaysOriginal)
         // Shopping Basket Tab
 //        let shoppingBasketStoryboard = UIStoryboard.init(name: "ShoppingBasketExample", bundle: nil)
 //        guard let fifthTab = shoppingBasketStoryboard.instantiateViewController(identifier: "ShoppingBasketExVC")

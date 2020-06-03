@@ -162,8 +162,11 @@ extension ShoppingBasketJHVC: UITableViewDataSource {
         case 0:
             if let cell = tableView.dequeueReusableCell(withIdentifier: TabBarCellJH.identifier)
                 as? TabBarCellJH{
+                cell.tabIndicatorView.backgroundColor = .systemBlue
+                cell.indicatorHeightConstraint.constant = 3
                 return cell
             }
+            
         case 1:
             if let cell = tableView.dequeueReusableCell(withIdentifier: EditTabCellJH.identifier) as? EditTabCellJH{
                 return cell

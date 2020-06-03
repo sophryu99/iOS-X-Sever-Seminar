@@ -59,7 +59,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="187.66666666666666" height="46"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="일반구매" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MUA-HB-XQw">
-                                                                    <rect key="frame" x="69.333333333333329" y="14.666666666666664" width="48.666666666666671" height="17"/>
+                                                                    <rect key="frame" x="69.333333333333329" y="17" width="48.666666666666671" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -74,18 +74,18 @@
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                             <constraints>
-                                                                <constraint firstItem="MUA-HB-XQw" firstAttribute="centerY" secondItem="MmP-qQ-DyL" secondAttribute="centerY" id="34I-Pz-e6n"/>
                                                                 <constraint firstItem="MUA-HB-XQw" firstAttribute="centerX" secondItem="MmP-qQ-DyL" secondAttribute="centerX" id="5rz-MI-tM9"/>
                                                                 <constraint firstAttribute="bottom" secondItem="dLh-vg-Uh7" secondAttribute="bottom" id="DUA-Ic-yPy"/>
                                                                 <constraint firstItem="dLh-vg-Uh7" firstAttribute="leading" secondItem="MmP-qQ-DyL" secondAttribute="leading" id="kq5-bM-O51"/>
                                                                 <constraint firstAttribute="trailing" secondItem="dLh-vg-Uh7" secondAttribute="trailing" id="pbx-rP-YLS"/>
+                                                                <constraint firstItem="dLh-vg-Uh7" firstAttribute="top" secondItem="MUA-HB-XQw" secondAttribute="bottom" constant="11" id="tJD-Bh-ecs"/>
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UWm-7q-nGu">
                                                             <rect key="frame" x="187.66666666666663" y="0.0" width="187.33333333333337" height="46"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="정기배송" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UVh-s0-cHI">
-                                                                    <rect key="frame" x="69.333333333333343" y="14.666666666666664" width="48.666666666666657" height="17"/>
+                                                                    <rect key="frame" x="69.333333333333343" y="17" width="48.666666666666657" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -100,10 +100,10 @@
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                             <constraints>
+                                                                <constraint firstItem="bdZ-6c-bbG" firstAttribute="top" secondItem="UVh-s0-cHI" secondAttribute="bottom" constant="11" id="6ft-41-Udr"/>
                                                                 <constraint firstItem="UVh-s0-cHI" firstAttribute="centerX" secondItem="UWm-7q-nGu" secondAttribute="centerX" id="Gh0-NF-FA1"/>
                                                                 <constraint firstAttribute="trailing" secondItem="bdZ-6c-bbG" secondAttribute="trailing" id="N0n-YS-mZb"/>
                                                                 <constraint firstItem="bdZ-6c-bbG" firstAttribute="leading" secondItem="UWm-7q-nGu" secondAttribute="leading" id="giB-aJ-bA2"/>
-                                                                <constraint firstItem="UVh-s0-cHI" firstAttribute="centerY" secondItem="UWm-7q-nGu" secondAttribute="centerY" id="nRu-55-alf"/>
                                                                 <constraint firstAttribute="bottom" secondItem="bdZ-6c-bbG" secondAttribute="bottom" id="xic-Sj-JCl"/>
                                                             </constraints>
                                                         </view>
@@ -120,6 +120,11 @@
                                                 <constraint firstItem="hku-a3-ujG" firstAttribute="leading" secondItem="cQE-qY-pST" secondAttribute="leading" id="jyJ-PR-zPB"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="indicatorHeightConstraint" destination="lnu-7V-Sln" id="ZZI-HM-SeC"/>
+                                            <outlet property="tabIndicatorView" destination="dLh-vg-Uh7" id="MHM-ci-0r3"/>
+                                            <outlet property="tabNameLabel" destination="MUA-HB-XQw" id="4Al-Cf-3vc"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EditTabCellJH" rowHeight="46" id="PcI-Oy-1O1" customClass="EditTabCellJH" customModule="iOS_Design_Project" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="101.33333206176758" width="375" height="46"/>
