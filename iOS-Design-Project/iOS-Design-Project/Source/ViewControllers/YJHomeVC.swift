@@ -21,7 +21,7 @@ class YJHomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate,UICol
     
     let username = "곽민주" //user이름(하단 '~님의 맞춤 상품'에 사용)
     let imageNames = ["ad1","ad1","ad1","ad1","ad1","ad1"] //홍보배너에 들어갈 이미지
-    let product = ["고구마","마스크","선풍기","운동화","건조기","고등어","마스크","카메라","면도기","닌텐도"] //인기검색어에 들어갈 정보
+    var product = ["","","","","","","","","",""] //인기검색어에 들어갈 정보
     let cateimgs = ["iconFashion","iconBeauty","iconSport","iconCook","iconBook","iconTicket","iconOffice","iconSupply","iconHealth","iconDigital"] //카테고리뷰에 띄울 아이콘 이미지
     var numberOfItems = 6 //배너 수
     var numberOfnumbers = 10 //실시간 검색어 수
@@ -81,6 +81,9 @@ class YJHomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate,UICol
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        search()
+        
         user.text = username + "님의 추천상품"
         
         //홍보배너 뷰 페이지 아이콘 이미지 설정
@@ -96,7 +99,7 @@ class YJHomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate,UICol
         setPager()
         setSearchbar()
         setproductinfo()
-        
+       
         // Do any additional setup after loading the view.
     }
     
@@ -146,6 +149,28 @@ class YJHomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate,UICol
         //SearchBar icon 설정
         HomeSearchBar.setImage(UIImage(named: "iconTopSearch"), for: .search, state: .normal)
 
+    }
+    
+    func search() {
+        YJSearchService.shared.makesearch() { networkResult in
+            switch networkResult {
+            case .success(let products):
+                guard let searchname = products as? [ProductData] else { return }
+                for i in 0..<searchname.count{
+                    self.product[i] = searchname[i].name
+                }
+            case .requestErr(let message):
+                guard let message = message as? String else { return }
+                let alertViewController = UIAlertController(title: "인기검색어 조회 실패", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+            case .pathErr: print("path")
+            case .serverErr: print("serverErr")
+            case .networkFail: print("networkFail")
+
+            }
+        }
     }
 
     
