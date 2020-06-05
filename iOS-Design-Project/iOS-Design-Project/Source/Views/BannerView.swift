@@ -101,7 +101,7 @@ class BannerView: UIView , UIScrollViewDelegate{
     }
     private func setupPageControl() {
 
-        pageControl.numberOfPages = 6
+        pageControl.numberOfPages = 5
         pageControl.translatesAutoresizingMaskIntoConstraints = true
         pageControl.currentPageIndicatorTintColor = UIColor.blue
         pageControl.pageIndicatorTintColor = UIColor.lightGray.withAlphaComponent(0.8)

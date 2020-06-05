@@ -10,6 +10,36 @@ import UIKit
 
 class HomeExVC: UIViewController {
     /// 상단 Banner
+    var ProductInformation:[ProductData] = []
+    
+    var urls:[URL] = []
+    var rankingName:[String] = []
+    func searchGET(){
+        
+    }
+
+    func dataRequest(){
+        HomeService.shared.setUI() { networkResult in
+            switch networkResult {
+            case .success(let resultData):
+                
+                guard let data=resultData as? [ProductData] else {
+                    return}
+                for index in 0..<data.count {
+                    self.urls.append(data[index].bannerimg)
+                }
+                print(self.urls)
+                self.ProductInformation = data
+                self.setUpUI()
+                self.setUpBannerView(item: self.ProductInformation.count)
+            case .pathErr : print("Patherr")
+            case .serverErr : print("ServerErr")
+            case .requestErr(let message) : print(message)
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
     @IBOutlet weak var Banner: UIView!
     private var bannerView:BannerView!
     private func setUpUI() {
@@ -26,22 +56,19 @@ class HomeExVC: UIViewController {
            return self.itemView(at: index)
         }
     }
-        private func itemView(at index:Int)->UIImageView {
-            let urls:[String] = ["ad1","ad2","ad3","ad4","ad5","ad6"]
+    private func itemView(at index:Int)->UIImageView {
             let itemImageView:UIImageView = UIImageView(frame: .zero)
             itemImageView.translatesAutoresizingMaskIntoConstraints = false
-            itemImageView.image = UIImage(named: urls[index])
+            itemImageView.setImage(path: self.urls[index])
             itemImageView.clipsToBounds = true
             itemImageView.contentMode = UIView.ContentMode.scaleToFill
             itemImageView.isUserInteractionEnabled=true
-            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(buttonTapped(tapGestureRecognizer:)))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(buttonTapped(i:)))
             itemImageView.addGestureRecognizer(tapGestureRecognizer)
             return itemImageView
-        }
-    @objc func buttonTapped(tapGestureRecognizer : UITapGestureRecognizer ){
-        if(tapGestureRecognizer.state == .ended){
-            print("터치")
-        }
+    }
+    @objc func buttonTapped(i:Int){
+        
     }
     ///로켓시리즈
     @IBAction func roketDiliveryButton(_ sender: Any) {
@@ -78,6 +105,7 @@ class HomeExVC: UIViewController {
     }
 /// 인기검색어
     
+    @IBOutlet weak var RankingCollectionView: UICollectionView!
     @IBOutlet weak var RankingViewHeight: NSLayoutConstraint!
     @IBOutlet weak var RankLabel: UILabel!
     @IBOutlet weak var RankItemLabel: UILabel!
@@ -85,9 +113,26 @@ class HomeExVC: UIViewController {
     @IBOutlet weak var buttonImg: UIButton!
     @IBOutlet weak var Ranking: UIView!
     @IBAction func RankButton(_ sender: Any) {
-        
         if toggle {
-            self.RankingViewHeight.constant = self.Ranking.frame.size.height * 5
+            HomeService.shared.getRank(){ networkResult in
+                switch networkResult{
+                case .success(let rank):
+                    guard let data=rank as? [Rank] else {
+                        return}
+                    for index in 0..<data.count {
+                        self.rankingName.append(data[index].name)
+                    }
+                    self.RankItemLabel.text = self.rankingName[0]
+                    self.setRankInfo()
+                case .pathErr : print("Patherr")
+                case .serverErr : print("ServerErr")
+                case .requestErr(let message) : print(message)
+                case .networkFail:
+                    print("networkFail")
+                }
+            }
+            //self.RankingViewHeight.constant = self.Ranking.frame.size.height * 5
+            self.RankingViewHeight.constant = 26 * 5
             UIView.animate(withDuration: 0.5, animations: {
                 self.view.layoutIfNeeded()
             })
@@ -111,19 +156,11 @@ class HomeExVC: UIViewController {
     
     
     private func setRankInfo(){
-        //RankingCollectionView.delegate = self
-        //RankingCollectionView.dataSource = self
-        //RankingCollectionView.tag = 3
-        //let layout = RankingCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        //let width = floor(self.RankingCollectionView.frame.width)
-        //layout.itemSize = CGSize(width: width, height: 16)
+        RankingCollectionView.delegate = self
+        RankingCollectionView.dataSource = self
+        RankingCollectionView.tag = 3
     }
-    
-    
-    
-    
-    
-    
+
     
 ///아래 콜렉션뷰
     
@@ -136,15 +173,12 @@ class HomeExVC: UIViewController {
         ProductCollectionView.tag = 2
     }
     private var headerLabel:[String] = ["@@@님의 추천상품","로켓프레시","오늘의 특가"]
-
-    
-    
     
 /// 뷰디드로드
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpUI()
-        setUpBannerView(item: 6)
+        dataRequest()
+
         setCategoryInformation()
         setProductInformation()
         //setRankInfo()
@@ -174,7 +208,7 @@ extension HomeExVC:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 1{return first_page_categoryImageInformation.count}
         else if collectionView.tag == 3 {
-            return 10
+            return self.rankingName.count
         }
         else { return 1}
     }
@@ -204,7 +238,7 @@ extension HomeExVC:UICollectionViewDataSource{
         else {
             let cell:RankingCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: RankingCollectionViewCell.identifier, for: indexPath) as! RankingCollectionViewCell
             cell.RankLabel.text = String(indexPath.row + 1)
-            cell.itemLabel.text = String(indexPath.row + 1) + "번째 아이템"
+            cell.itemLabel.text = rankingName[indexPath.row]
             if indexPath.row > 2{
                 cell.RankLabel.textColor = UIColor.black
             }
@@ -218,6 +252,11 @@ extension HomeExVC:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         print(indexPath)
+        if collectionView.tag == 3 {
+            //print("상품 id : " + String(self.ProductInformation[indexPath.row].id))
+            //print("상품 이름 : " + String(self.ProductInformation[indexPath.row].name))
+            //print("상품 가격 : " + String(self.ProductInformation[indexPath.row].price))
+        }
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexpath:IndexPath) ->UICollectionReusableView{
 
@@ -251,10 +290,21 @@ extension HomeExVC: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        if collectionView.tag == 1 {
-        return 8
+        if collectionView.tag == 1 {return 8}
+        else if collectionView.tag == 3{ return 0 }
+        else {return 0}
+    }
+}
+
+extension UIImageView {
+    func setImage(path:URL) {
+       let url = path
+        DispatchQueue.global(qos: .background).async {
+            guard let data:Data = try? Data(contentsOf: url) , let image:UIImage = UIImage(data: data) else { return }
+            DispatchQueue.main.async {
+                self.image = image
+            }
         }
-        else { return 0 }
     }
 }
 /*extension HomeExVC:UIScrollViewDelegate{

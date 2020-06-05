@@ -19,26 +19,38 @@ class ProductCollectionViewCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    private var badgeboolean : [Bool] = [false,false,false]
+    private var badgeImgName : [String] = ["badgeRoketwow","badgeRoketfresh","badgeRoketdelivery"]
     private var ProductInformation:[[Product]] = []
     var sectionNumber:Int?
     func setupViews(){
-        let item1 = Product(imagname: "img1", name: "item1", price: "price1")
-        let item2 = Product(imagname: "img2", name: "item2", price: "price2")
-        let item3 = Product(imagname: "img3", name: "item3", price: "price3")
-        let item4 = Product(imagname: "img4", name: "item4", price: "price4")
-        let item5 = Product(imagname: "img5", name: "item5", price: "price5")
-        let item6 = Product(imagname: "img6", name: "item6", price: "price6")
-        let item7 = Product(imagname: "img7", name: "item7", price: "price7")
-        let item8 = Product(imagname: "img8", name: "item8", price: "price8")
-        let item9 = Product(imagname: "img9", name: "item9", price: "price9")
-        
-        let array1:[Product] = [item1,item2,item3,item4,item5,item6,item7,item8,item9]
-        let array2:[Product] = [item1,item2,item3,item4,item5,item6,item7,item8,item9]
-        let array3:[Product] = [item1,item2,item3,item4,item5,item6,item7,item8,item9]
-        ProductInformation=[array1,array2,array3]
-
-        InnerCollectionView.delegate = self
-        InnerCollectionView.dataSource = self
+        var recommend:[Product] = []
+        var roketfresh:[Product] = []
+        var todayprice:[Product] = []
+        HomeService.shared.setUI() { networkResult in
+            switch networkResult {
+            case .success(let resultData):
+                
+                guard let data=resultData as? [ProductData] else {
+                    return}
+                for index in 0..<data.count {
+                    let item = Product(imagname: data[index].img, name: data[index].name, price: data[index].price, bool: [data[index].wow,data[index].fresh, data[index].delivery])
+                    recommend.append(item)
+                    roketfresh.append(item)
+                    todayprice.append(item)
+                }
+                self.ProductInformation=[recommend,roketfresh,todayprice]
+                self.InnerCollectionView.delegate = self
+                self.InnerCollectionView.dataSource = self
+                
+                
+            case .pathErr : print("Patherr")
+            case .serverErr : print("ServerErr")
+            case .requestErr(let message) : print(message)
+            case .networkFail:
+                print("networkFail")
+            }
+        }
     }
 
 }
@@ -49,12 +61,30 @@ extension ProductCollectionViewCell:UICollectionViewDelegate {
     }
 }
 extension ProductCollectionViewCell:UICollectionViewDataSource{
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+         collectionView.deselectItem(at: indexPath, animated: true)
+        print("상품 이름 : " + ProductInformation[sectionNumber!][indexPath.row].ProductName)
+        print("상품 가격 : " + ProductInformation[sectionNumber!][indexPath.row].ProductPrice + "원")
+     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
         let cell:InnerProductCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: InnerProductCollectionViewCell.identifier, for: indexPath) as! InnerProductCollectionViewCell
-        cell.ProductImage.image = UIImage(named: ProductInformation[sectionNumber!][indexPath.row].ProductImageName)
-        cell.ProductName.text = ProductInformation[sectionNumber!][indexPath.row].ProductName
-        cell.ProductPrice.text = ProductInformation[sectionNumber!][indexPath.row].ProductPrice
+        cell.ProductImage.setImage(path: ProductInformation[sectionNumber!][indexPath.row].ProductImageName)
+        cell.ProductName.text = ProductInformation[sectionNumber!][indexPath.row].ProductPrice + " 원"
+        cell.ProductPrice.text = ProductInformation[sectionNumber!][indexPath.row].ProductName
+        cell.ProductImage.contentMode = UIView.ContentMode.scaleAspectFill
+        //cell.ProductImage.backgroundColor = UIColor.blue
+        cell.ProductImage.frame.size = CGSize(width: 95, height: 121)
+        var badgenum = 0
+        for index in 0..<3 {
+            if ProductInformation[sectionNumber!][indexPath.row].badgeBool[index] {
+                let badgeFrame = CGRect(x: 5 + badgenum*23, y: 5, width: 23, height: 23)
+                let badgeImg = UIImageView(frame: badgeFrame)
+                badgeImg.image = UIImage(named: badgeImgName[index])
+                cell.addSubview(badgeImg)
+                badgenum = badgenum + 1
+            }
+        }
         return cell
     }
 }
@@ -68,7 +98,7 @@ extension ProductCollectionViewCell:UICollectionViewDelegateFlowLayout{
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width : 95,height:121)
+        return CGSize(width : 95,height:165)
     }
 }
 
