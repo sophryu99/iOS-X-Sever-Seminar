@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class HomeSHVC: UIViewController {
 
@@ -34,7 +36,14 @@ class HomeSHVC: UIViewController {
     private var rocketList: [RocketSH] = []
     private var todayList: [TodaySH] = []
     private var items: [PopularSH] = []
-
+    
+    // network
+    var ProductInformation:[ImageData] = []
+    var urls:[URL] = []
+    
+    // 인기 검색어
+    var rankingName:[String] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,6 +103,91 @@ class HomeSHVC: UIViewController {
             super.didReceiveMemoryWarning()
         }
         
+    // 실검 서버 연결
+//    private func setPopular() {
+//        let url = URL(string: "http://ec2-3-34-36-2.ap-northeast-2.compute.amazonaws.com:3000/search")
+//
+//        Alamofire.request(url!).responseString() { response in
+//
+//            switch response.result {
+//            case .success(let value):
+//                let json = JSON(value)
+//                let result = json["success"].boolValue
+//                if result == true {
+//                    print("성공여부 : \(response.result.isSuccess)")
+//                    print("결과값 : \(response.result.value!)")
+//                    PopularCellSH.popCell.p1.text = response.result.value
+//                    //PopularCellSH.popCell.p1.sizeToFit()
+//
+//                }else {
+//                    print("성공여부 : \(response.result.isSuccess)")
+//
+//                    print("결과값 : \(response.result.value!)")
+//                }
+//
+//            default:
+//                return
+//            }
+
+
+            //PopularCellSH.popCell.p1.text = response.result.value
+            //PopularCellSH.popCell.p1.sizeToFit()
+
+    
+//    func dataRequest(){
+//        IDServiceSH.idService.getTrending() { networkResult in
+//            switch networkResult {
+//            case .success(let resultData):
+//
+//                guard let data = resultData as? [ImageData] else {
+//                    return}
+//                for index in 0..<data.count {
+//                    self.urls.append(data[index].bannerimg)
+//                }
+//                print(self.urls)
+//                self.ProductInformation = data
+//                self.setUpUI()
+//                self.setUpBannerView(item: self.ProductInformation.count)
+//            case .pathErr : print("Patherr")
+//            case .serverErr : print("ServerErr")
+//            case .requestErr(let message) :
+//                guard let message = message as? String else { return }
+//                let alertViewController = UIAlertController(title: "인기검색어 조회 실패", message: message, preferredStyle: .alert)
+//                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+//                alertViewController.addAction(action)
+//                self.present(alertViewController, animated: true, completion: nil)
+//            case .networkFail:
+//                print("networkFail")
+//            }
+//        }
+//    }
+    
+//    func searchData() {
+//        IDServiceSH.idService.getTrending() { response in
+//            switch response.result {
+//            case .success(let products):
+//                guard let searchname = products as? [trendingData] else { return }
+//                let json = JSON(products)
+//                let result = json["success"].boolValue
+//                for i in 0..<searchname.count{
+//                    print("결과값 : \(networkResult.result.value)")
+//                    //self.items[i] = searchname[i].name
+//                }
+//
+//            case .requestErr(let message):
+//                guard let message = message as? String else { return }
+//                let alertViewController = UIAlertController(title: "인기검색어 조회 실패", message: message, preferredStyle: .alert)
+//                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+//                alertViewController.addAction(action)
+//                self.present(alertViewController, animated: true, completion: nil)
+//            case .pathErr: print("path")
+//            case .serverErr: print("serverErr")
+//            case .networkFail: print("networkFail")
+//
+//            }
+//        }
+//    }
+    
     
     // 검색창 설정하기
     private func setSearchIcon() {
@@ -375,17 +469,9 @@ extension HomeSHVC: UICollectionViewDataSource, UICollectionViewDelegate {
         pageControl?.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
     }
     
-    
-//    // PageControl
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let width = scrollView.frame.width -
-//                (scrollView.contentInset.left*2)
-//        let index = scrollView.contentOffset.x / width
-//        let roundedIndex = round(index)
-//        self.pageControl?.currentPage = Int(roundedIndex)
-//        }
+
             
-        }
+}
         
 
 
@@ -419,9 +505,34 @@ extension HomeSHVC: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 0 {
             let cell: PopularTitleCellSH = tableView.dequeueReusableCell(withIdentifier: "Section0", for: indexPath) as! PopularTitleCellSH
             return cell
-        }else {
+        } else {
             //클릭시 펼쳐질 셀
             let cell: PopularCellSH = tableView.dequeueReusableCell(withIdentifier: "Section1", for: indexPath) as! PopularCellSH
+            IDServiceSH.idService.getTrending(){ networkResult in
+                switch networkResult {
+                case .success(let rank):
+                    guard let data=rank as? [trendingData] else {
+                        return}
+                    for index in 0..<data.count {
+                        self.rankingName.append(data[index].name)
+                    }
+                    cell.p1.text = self.rankingName[0]
+                    cell.p2.text = self.rankingName[1]
+                    cell.p3.text = self.rankingName[2]
+                    cell.p4.text = self.rankingName[3]
+                    cell.p5.text = self.rankingName[4]
+                    cell.p6.text = self.rankingName[5]
+                    cell.p7.text = self.rankingName[6]
+                    cell.p8.text = self.rankingName[7]
+                    cell.p9.text = self.rankingName[8]
+                    cell.p10.text = self.rankingName[9]
+                case .pathErr : print("Patherr")
+                case .serverErr : print("ServerErr")
+                case .requestErr(let message) : print(message)
+                case .networkFail:
+                    print("networkFail")
+                }
+            }
             return cell
         }
     }
@@ -429,6 +540,7 @@ extension HomeSHVC: UITableViewDelegate, UITableViewDataSource {
     //cell 확장효과
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? PopularTitleCellSH else {return}
+        //guard let cellBody = tableView.cellForRow(at: indexPath) as? PopularCellSH else {return}
         guard let index = tableView.indexPath(for: cell) else { return }
         
         heightConstraint.constant = 170
@@ -436,6 +548,23 @@ extension HomeSHVC: UITableViewDelegate, UITableViewDataSource {
             if index.row == 0 {
                 if items[indexPath.section].open == true {
                     items[indexPath.section].open = false
+//                    IDServiceSH.idService.getTrending(){ networkResult in
+//                        switch networkResult {
+//                        case .success(let rank):
+//                            guard let data=rank as? [trendingData] else {
+//                                return}
+//                            for index in 0..<data.count {
+//                                self.rankingName.append(data[index].name)
+//                            }
+//                            cellBody.p1.text = self.rankingName[0]
+//                        case .pathErr : print("Patherr")
+//                        case .serverErr : print("ServerErr")
+//                        case .requestErr(let message) : print(message)
+//                        case .networkFail:
+//                            print("networkFail")
+//                        }
+//                    }
+                    
                     cell.arrowImg.image = UIImage(named: "iconRealtimeDown")
                     cell.productLabel.text = ""
                     cell.rankNumber.text = ""
@@ -450,8 +579,24 @@ extension HomeSHVC: UITableViewDelegate, UITableViewDataSource {
 
                 } else {
                     items[indexPath.section].open = true
+                    IDServiceSH.idService.getTrending(){ networkResult in
+                        switch networkResult{
+                        case .success(let rank):
+                            guard let data=rank as? [trendingData] else {
+                                return}
+                            for index in 0..<data.count {
+                                self.rankingName.append(data[index].name)
+                            }
+                            cell.productLabel.text = self.rankingName[0]
+                        case .pathErr : print("Patherr")
+                        case .serverErr : print("ServerErr")
+                        case .requestErr(let message) : print(message)
+                        case .networkFail:
+                            print("networkFail")
+                        }
+                    }
                     cell.arrowImg.image = UIImage(named: "iconRealtimeMore")
-                    cell.productLabel.text = "고구마"
+                    //cell.productLabel.text = "고구마"
                     cell.rankNumber.text = "1"
                     cell.update.text = ""
                     cell.realTime.image = UIImage(named: "realtimestate")

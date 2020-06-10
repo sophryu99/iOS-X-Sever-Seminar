@@ -9,6 +9,7 @@ target 'iOS-Design-Project' do
 pod 'FSPagerView'
 pod 'Alamofire', '~> 4.8.2'
 pod 'Kingfisher', '~> 5.0'
+pod 'SwiftyJSON', '~> 4.0'
 
   # Pods for iOS-Design-Project
 
