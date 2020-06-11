@@ -20,9 +20,8 @@ struct IDServiceSH {
 
         let header: HTTPHeaders = ["Content-Type": "application/json"]
         
-        
         // function to get image
-        let dataRequest = Alamofire.request(APIConstants.itemsURL, method: .get, encoding: JSONEncoding.default, headers: header)
+        let dataRequest = Alamofire.request(APIConstants.itemsURL, headers: header)
         
         dataRequest.responseData { dataResponse in
         switch dataResponse.result {

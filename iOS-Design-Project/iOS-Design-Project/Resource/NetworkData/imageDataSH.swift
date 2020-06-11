@@ -7,7 +7,7 @@
 //
 
 import Foundation
-struct imageDataSH: Codable{
+struct imageDataSH: Codable {
     var success : Bool
     var message : String
     var data : [ImageData]
@@ -22,7 +22,7 @@ struct imageDataSH: Codable{
         let values = try decoder.container(keyedBy: CodingKeys.self)
         success = (try? values.decode(Bool.self, forKey: .success)) ?? false
         message = (try? values.decode(String.self, forKey: .message)) ?? ""
-        data = (try? values.decode([ImageData].self, forKey: .data)) ?? [ImageData(id: 0, name: "", price: 0, wow: false, delivery: false, fresh: false, basket: false, img:URL(string: "")!, bannerimg: URL(string: "")!)]
+        data = (try? values.decode([ImageData].self, forKey: .data)) ?? [ImageData(id: 0, name: "", price: 0, wow: false, delivery: false, fresh: false, basket: false, img: "", bannerimg: "")]
     }
 }
 
@@ -34,6 +34,6 @@ struct ImageData:Codable{
     var delivery:Bool
     var fresh:Bool
     var basket:Bool
-    var img:URL
-    var bannerimg:URL
+    var img:String
+    var bannerimg:String
 }

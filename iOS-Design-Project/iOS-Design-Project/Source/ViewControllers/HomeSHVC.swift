@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Kingfisher
 
 class HomeSHVC: UIViewController {
 
@@ -22,9 +23,7 @@ class HomeSHVC: UIViewController {
     @IBOutlet weak var rocketDelivery: UIButton!
     @IBOutlet weak var rocketOverseas: UIButton!
     @IBOutlet weak var rocketFresh: UIButton!
-        
     @IBOutlet weak var CatCollectionView: UICollectionView!
-    
     @IBOutlet weak var RecCollectionView: UICollectionView!
     @IBOutlet weak var RocketCollectionView: UICollectionView!
     @IBOutlet weak var TodayCollectionView: UICollectionView!
@@ -39,11 +38,12 @@ class HomeSHVC: UIViewController {
     
     // network
     var ProductInformation:[ImageData] = []
-    var urls:[URL] = []
+    var urls: [String] = []
+    var productNames: [String] = []
+    var productPrices: [Int] = []
     
     // 인기 검색어
     var rankingName:[String] = []
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +75,7 @@ class HomeSHVC: UIViewController {
         RecCollectionView.dataSource = self
         RecCollectionView.isPagingEnabled = true
         RecCollectionView.showsHorizontalScrollIndicator = false
-    
+        
         // RocketCollectionView
         setRocketList()
         setRocketView()
@@ -97,96 +97,75 @@ class HomeSHVC: UIViewController {
         popularTableView.delegate = self
         popularTableView.dataSource = self
         
+
     }
         
-        override func didReceiveMemoryWarning() {
-            super.didReceiveMemoryWarning()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // Banner
+        getURLBanner()
+
+        // 상품 카테고리
+        getURLProduct()
+
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    // 배너 이미지 통신
+    func getURLBanner(){
+        IDServiceSH.idService.getImage() { networkResult in
+            switch networkResult {
+            case .success(let resultData):
+                
+                guard let data=resultData as? [ImageData] else {
+                    return }
+                for index in 0..<data.count {
+                    self.urls.append(data[index].bannerimg)
+                    
+                }
+                print("Success")
+                print(self.urls.count)
+                self.ProductInformation = data
+            case .pathErr : print("Patherr")
+            case .serverErr : print("ServerErr")
+            case .requestErr(let message) : print(message)
+            case .networkFail:
+                print("networkFail")
+            }
         }
-        
-    // 실검 서버 연결
-//    private func setPopular() {
-//        let url = URL(string: "http://ec2-3-34-36-2.ap-northeast-2.compute.amazonaws.com:3000/search")
-//
-//        Alamofire.request(url!).responseString() { response in
-//
-//            switch response.result {
-//            case .success(let value):
-//                let json = JSON(value)
-//                let result = json["success"].boolValue
-//                if result == true {
-//                    print("성공여부 : \(response.result.isSuccess)")
-//                    print("결과값 : \(response.result.value!)")
-//                    PopularCellSH.popCell.p1.text = response.result.value
-//                    //PopularCellSH.popCell.p1.sizeToFit()
-//
-//                }else {
-//                    print("성공여부 : \(response.result.isSuccess)")
-//
-//                    print("결과값 : \(response.result.value!)")
-//                }
-//
-//            default:
-//                return
-//            }
-
-
-            //PopularCellSH.popCell.p1.text = response.result.value
-            //PopularCellSH.popCell.p1.sizeToFit()
-
+    }
     
-//    func dataRequest(){
-//        IDServiceSH.idService.getTrending() { networkResult in
-//            switch networkResult {
-//            case .success(let resultData):
-//
-//                guard let data = resultData as? [ImageData] else {
-//                    return}
-//                for index in 0..<data.count {
-//                    self.urls.append(data[index].bannerimg)
-//                }
-//                print(self.urls)
-//                self.ProductInformation = data
-//                self.setUpUI()
-//                self.setUpBannerView(item: self.ProductInformation.count)
-//            case .pathErr : print("Patherr")
-//            case .serverErr : print("ServerErr")
-//            case .requestErr(let message) :
-//                guard let message = message as? String else { return }
-//                let alertViewController = UIAlertController(title: "인기검색어 조회 실패", message: message, preferredStyle: .alert)
-//                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
-//                alertViewController.addAction(action)
-//                self.present(alertViewController, animated: true, completion: nil)
-//            case .networkFail:
-//                print("networkFail")
-//            }
-//        }
-//    }
     
-//    func searchData() {
-//        IDServiceSH.idService.getTrending() { response in
-//            switch response.result {
-//            case .success(let products):
-//                guard let searchname = products as? [trendingData] else { return }
-//                let json = JSON(products)
-//                let result = json["success"].boolValue
-//                for i in 0..<searchname.count{
-//                    print("결과값 : \(networkResult.result.value)")
-//                    //self.items[i] = searchname[i].name
-//                }
-//
-//            case .requestErr(let message):
-//                guard let message = message as? String else { return }
-//                let alertViewController = UIAlertController(title: "인기검색어 조회 실패", message: message, preferredStyle: .alert)
-//                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
-//                alertViewController.addAction(action)
-//                self.present(alertViewController, animated: true, completion: nil)
-//            case .pathErr: print("path")
-//            case .serverErr: print("serverErr")
-//            case .networkFail: print("networkFail")
-//
-//            }
-//        }
-//    }
+    // 상품 이미지 통신
+    func getURLProduct(){
+        IDServiceSH.idService.getImage() { networkResult in
+            switch networkResult {
+            case .success(let resultData):
+
+                guard let data = resultData as? [ImageData] else {
+                    return}
+                for index in 0..<data.count {
+                    self.urls.append(data[index].img)
+                    self.productNames.append(data[index].name)
+                    self.productPrices.append(data[index].price)
+                }
+                print("Success2")
+                print(self.urls)
+                print(self.productNames)
+                
+                self.ProductInformation = data
+                
+            case .pathErr : print("Patherr")
+            case .serverErr : print("ServerErr")
+            case .requestErr(let message) : print(message)
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
     
     
     // 검색창 설정하기
@@ -209,6 +188,7 @@ class HomeSHVC: UIViewController {
          searchField.leftViewMode = UITextField.ViewMode.always
          searchField.leftView = view
         
+        
     }
     
     // 광고 이미지 불러오기
@@ -218,9 +198,9 @@ class HomeSHVC: UIViewController {
         let image3 = AdsSH(imageName: "ad3")
         let image4 = AdsSH(imageName: "ad4")
         let image5 = AdsSH(imageName: "ad5")
-        let image6 = AdsSH(imageName: "ad6")
+        //let image6 = AdsSH(imageName: "ad6")
         
-        adImageList = [image1, image2, image3, image4, image5, image6]
+        adImageList = [image1, image2, image3, image4, image5]
     }
     
     // AdCollectionView 설정
@@ -371,12 +351,12 @@ class HomeSHVC: UIViewController {
     
     // 인기검색어 이미지 불러오기
     private func setPopList() {
-        let image1 = PopularSH(Product: "고구마", arrowImg: "", titleProduct: "", rankNumber: "", update: "", realTime: "")
-        let image2 = PopularSH(Product: "고구마", arrowImg: "", titleProduct: "", rankNumber: "", update: "", realTime: "")
+        let image1 = PopularSH(Product: "고구마1", arrowImg: "", titleProduct: "", rankNumber: "", update: "", realTime: "")
+        let image2 = PopularSH(Product: "고구마1", arrowImg: "", titleProduct: "", rankNumber: "", update: "", realTime: "")
         let image3 = PopularSH(Product: "해산물", arrowImg: "", titleProduct: "", rankNumber: "", update: "", realTime: "")
-        let image4 = PopularSH(Product: "고구마", arrowImg: "", titleProduct: "", rankNumber: "", update: "", realTime: "")
-        let image5 = PopularSH(Product: "고구마", arrowImg: "",titleProduct: "", rankNumber: "", update: "", realTime: "")
-        let image6 = PopularSH(Product: "고구마", arrowImg: "",titleProduct: "", rankNumber: "", update: "", realTime: "")
+        let image4 = PopularSH(Product: "고구마1", arrowImg: "", titleProduct: "", rankNumber: "", update: "", realTime: "")
+        let image5 = PopularSH(Product: "고구마1", arrowImg: "",titleProduct: "", rankNumber: "", update: "", realTime: "")
+        let image6 = PopularSH(Product: "고구마1", arrowImg: "",titleProduct: "", rankNumber: "", update: "", realTime: "")
         
         items = [image1, image2, image3, image4, image5, image6]
     }
@@ -417,6 +397,7 @@ extension HomeSHVC: UICollectionViewDataSource, UICollectionViewDelegate {
         if collectionView == self.AdCollectionView {
             guard let adCell = collectionView.dequeueReusableCell(withReuseIdentifier: AdCellSH.identifier, for: indexPath) as? AdCellSH else { return UICollectionViewCell()}
             adCell.set(adImageList[indexPath.row])
+            //adCell.adImageView.imageFromUrl(self.urls[0], defaultImgPath: "ad1")
             return adCell
         } else if collectionView == self.CatCollectionView {
             guard let catCell = collectionView.dequeueReusableCell(withReuseIdentifier: CatCellSH.identifier, for: indexPath) as? CatCellSH else { return UICollectionViewCell()}
@@ -445,7 +426,6 @@ extension HomeSHVC: UICollectionViewDataSource, UICollectionViewDelegate {
         } else {
             return CGSize(width: collectionView.frame.width / 4, height: collectionView.frame.height)
         }
-        
 
     }
     
@@ -459,10 +439,12 @@ extension HomeSHVC: UICollectionViewDataSource, UICollectionViewDelegate {
 }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-    
-        pageControl?.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+        if scrollView == self.AdCollectionView {
+           pageControl?.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+        }
 
     }
+
 
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
 
@@ -494,7 +476,7 @@ extension HomeSHVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return 40
-        }else {
+        } else {
             return 200
         }
     }
@@ -540,7 +522,6 @@ extension HomeSHVC: UITableViewDelegate, UITableViewDataSource {
     //cell 확장효과
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? PopularTitleCellSH else {return}
-        //guard let cellBody = tableView.cellForRow(at: indexPath) as? PopularCellSH else {return}
         guard let index = tableView.indexPath(for: cell) else { return }
         
         heightConstraint.constant = 170
@@ -548,23 +529,6 @@ extension HomeSHVC: UITableViewDelegate, UITableViewDataSource {
             if index.row == 0 {
                 if items[indexPath.section].open == true {
                     items[indexPath.section].open = false
-//                    IDServiceSH.idService.getTrending(){ networkResult in
-//                        switch networkResult {
-//                        case .success(let rank):
-//                            guard let data=rank as? [trendingData] else {
-//                                return}
-//                            for index in 0..<data.count {
-//                                self.rankingName.append(data[index].name)
-//                            }
-//                            cellBody.p1.text = self.rankingName[0]
-//                        case .pathErr : print("Patherr")
-//                        case .serverErr : print("ServerErr")
-//                        case .requestErr(let message) : print(message)
-//                        case .networkFail:
-//                            print("networkFail")
-//                        }
-//                    }
-                    
                     cell.arrowImg.image = UIImage(named: "iconRealtimeDown")
                     cell.productLabel.text = ""
                     cell.rankNumber.text = ""
@@ -579,7 +543,7 @@ extension HomeSHVC: UITableViewDelegate, UITableViewDataSource {
 
                 } else {
                     items[indexPath.section].open = true
-                    IDServiceSH.idService.getTrending(){ networkResult in
+                    IDServiceSH.idService.getTrending() { networkResult in
                         switch networkResult{
                         case .success(let rank):
                             guard let data=rank as? [trendingData] else {
@@ -595,7 +559,7 @@ extension HomeSHVC: UITableViewDelegate, UITableViewDataSource {
                             print("networkFail")
                         }
                     }
-                    cell.arrowImg.image = UIImage(named: "iconRealtimeMore")
+                    cell.arrowImg.image = UIImage(named: "iconRealtimeMore2")
                     //cell.productLabel.text = "고구마"
                     cell.rankNumber.text = "1"
                     cell.update.text = ""
@@ -613,4 +577,23 @@ extension HomeSHVC: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+
+
+//// Kingfisher를 이용하여 url로부터 이미지를 가져오는 extension
+//extension UIImageView {
+//    public func imageFromUrl(_ urlString: String?, defaultImgPath : String) {
+//        let defaultImg = UIImage(named: defaultImgPath)
+//        if let url = urlString {
+//            if url.isEmpty {
+//                self.image = defaultImg
+//            } else {
+//                self.kf.setImage(with: URL(string: url), placeholder: defaultImg, options: [.transition(ImageTransition.fade(0.5))])
+//            }
+//        } else {
+//            self.image = defaultImg
+//        }
+//    }
+//}
+
+
 
