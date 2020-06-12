@@ -36,11 +36,13 @@ class HomeSHVC: UIViewController {
     private var todayList: [TodaySH] = []
     private var items: [PopularSH] = []
     
+   
     // network
     var ProductInformation:[ImageData] = []
     var urls: [String] = []
     var productNames: [String] = []
     var productPrices: [Int] = []
+    var urlInformation: [AdsSH] = []
     
     // 인기 검색어
     var rankingName:[String] = []
@@ -116,6 +118,7 @@ class HomeSHVC: UIViewController {
     
     // 배너 이미지 통신
     func getURLBanner(){
+        var bannerImage : [AdsSH] = []
         IDServiceSH.idService.getImage() { networkResult in
             switch networkResult {
             case .success(let resultData):
@@ -123,11 +126,13 @@ class HomeSHVC: UIViewController {
                 guard let data=resultData as? [ImageData] else {
                     return }
                 for index in 0..<data.count {
-                    self.urls.append(data[index].bannerimg)
-                    
+                    //self.urls.append(data[index].bannerimg)
+                    let item = AdsSH(imageName: data[index].bannerimg)
+                    bannerImage.append(item)
                 }
+                self.urlInformation = bannerImage
                 print("Success")
-                print(self.urls.count)
+                //print(self.urls.count)
                 self.ProductInformation = data
             case .pathErr : print("Patherr")
             case .serverErr : print("ServerErr")
@@ -155,7 +160,7 @@ class HomeSHVC: UIViewController {
                 print("Success2")
                 print(self.urls)
                 print(self.productNames)
-                
+                print(self.productPrices)
                 self.ProductInformation = data
                 
             case .pathErr : print("Patherr")
@@ -206,21 +211,22 @@ class HomeSHVC: UIViewController {
     // AdCollectionView 설정
     private func setAdsView() {
         // width, height 설정
-         let cellWidth = AdCollectionView.frame.width
-         let cellHeight = AdCollectionView.frame.height
-         
-         // 상하 inset value 설정
-         let insetY = (AdCollectionView.bounds.height - cellHeight) / 2.0
-         let layout = AdCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-         layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
-         layout.minimumLineSpacing = 0
-         layout.scrollDirection = .horizontal
+        let cellWidth = AdCollectionView.frame.width
+        let cellHeight = AdCollectionView.frame.height
         
-         AdCollectionView.contentInset = UIEdgeInsets(top: insetY, left: 0, bottom: insetY, right: 0)
-         
-         // 스크롤 시 빠르게 감속 되도록 설정
-         AdCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
+        // 상하 inset value 설정
+        let insetY = (AdCollectionView.bounds.height - cellHeight) / 2.0
+        let layout = AdCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
+        layout.minimumLineSpacing = 0
+        layout.scrollDirection = .horizontal
+        
+        AdCollectionView.contentInset = UIEdgeInsets(top: insetY, left: 0, bottom: insetY, right: 0)
+        
+        // 스크롤 시 빠르게 감속 되도록 설정
+        AdCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
     }
+    
     
     // 카테고리 이미지 불러오기
     private func setCatList() {
@@ -397,7 +403,12 @@ extension HomeSHVC: UICollectionViewDataSource, UICollectionViewDelegate {
         if collectionView == self.AdCollectionView {
             guard let adCell = collectionView.dequeueReusableCell(withReuseIdentifier: AdCellSH.identifier, for: indexPath) as? AdCellSH else { return UICollectionViewCell()}
             adCell.set(adImageList[indexPath.row])
+            //for index in 0..<urlInformation.count {
+                //adCell.adImageView.imageFromUrl(urlInformation[indexPath.row], defaultImgPath: "ad1")}
+                //print(urlInformation[index])
+                //adCell.adImageView.imageFromUrl(urlInformation.imageName[index], defaultImgPath: "ad1")
             //adCell.adImageView.imageFromUrl(self.urls[0], defaultImgPath: "ad1")
+
             return adCell
         } else if collectionView == self.CatCollectionView {
             guard let catCell = collectionView.dequeueReusableCell(withReuseIdentifier: CatCellSH.identifier, for: indexPath) as? CatCellSH else { return UICollectionViewCell()}
@@ -406,6 +417,9 @@ extension HomeSHVC: UICollectionViewDataSource, UICollectionViewDelegate {
         } else if collectionView == self.RecCollectionView {
             guard let recCell = collectionView.dequeueReusableCell(withReuseIdentifier: RecCellSH.identifier, for: indexPath) as? RecCellSH else { return UICollectionViewCell()}
             recCell.set(recList[indexPath.row])
+            //recCell.productImage.image = recInformation.imageName
+            //recCell.productName.text = self.productNames[0]
+            //recCell.productPrice.int = self.productPrices[0]
             return recCell
         } else if collectionView == self.RocketCollectionView{
             guard let rocketCell = collectionView.dequeueReusableCell(withReuseIdentifier: RocketCellSH.identifier, for: indexPath) as? RocketCellSH else { return UICollectionViewCell()}
@@ -576,6 +590,18 @@ extension HomeSHVC: UITableViewDelegate, UITableViewDataSource {
     
     }
     
+}
+
+extension UIImageView {
+    func setImage(path:URL) {
+       let url = path
+        DispatchQueue.global(qos: .background).async {
+            guard let data:Data = try? Data(contentsOf: url) , let image:UIImage = UIImage(data: data) else { return }
+            DispatchQueue.main.async {
+                self.image = image
+            }
+        }
+    }
 }
 
 
