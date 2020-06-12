@@ -608,18 +608,18 @@ extension HomeSHVC: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-extension UIImageView {
-    func setImage(path:URL) {
-       let url = path
-        DispatchQueue.global(qos: .background).async {
-            guard let data:Data = try? Data(contentsOf: url), let image:UIImage = UIImage(data: data) else { return }
-            DispatchQueue.main.async {
-                self.image = image
-            }
-        }
-    }
-}
-
+//extension UIImageView {
+//    func setImage(path:URL) {
+//       let url = path
+//        DispatchQueue.global(qos: .background).async {
+//            guard let data:Data = try? Data(contentsOf: url), let image:UIImage = UIImage(data: data) else { return }
+//            DispatchQueue.main.async {
+//                self.image = image
+//            }
+//        }
+//    }
+//}
+//
 
 
 

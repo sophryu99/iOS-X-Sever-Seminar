@@ -13,5 +13,4 @@ class InnerProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var ProductImage: UIImageView!
     @IBOutlet weak var ProductName: UILabel!
     @IBOutlet weak var ProductPrice: UILabel!
-    
 }

@@ -83,6 +83,10 @@ class BannerView: UIView , UIScrollViewDelegate{
         pageControl.currentPage = currentPage-1
    }
     
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        Int(targetContentOffset.pointee.x / scrollView.frame.width)
+    }
+    
     private func setUpUI() {
         scrollView.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height)
         scrollView.delegate = self
@@ -97,7 +101,7 @@ class BannerView: UIView , UIScrollViewDelegate{
     }
     private func setupPageControl() {
 
-        pageControl.numberOfPages = 6
+        pageControl.numberOfPages = 5
         pageControl.translatesAutoresizingMaskIntoConstraints = true
         pageControl.currentPageIndicatorTintColor = UIColor.blue
         pageControl.pageIndicatorTintColor = UIColor.lightGray.withAlphaComponent(0.8)

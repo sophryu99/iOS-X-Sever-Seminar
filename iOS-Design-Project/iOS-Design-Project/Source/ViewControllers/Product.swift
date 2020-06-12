@@ -9,13 +9,15 @@
 import Foundation
 
 struct Product {
-    var ProductImageName: String
+    var ProductImageName: URL
     var ProductName:String
     var ProductPrice:String
-    init (imagname:String, name:String,price:String){
+    var badgeBool:[Bool]
+    init (imagname:URL, name:String,price:Int, bool:[Bool]){
         self.ProductImageName = imagname
         self.ProductName = name
-        self.ProductPrice = price
+        self.ProductPrice = String(price)
+        self.badgeBool = bool
     }
 }
 /*
@@ -32,3 +34,7 @@ enum ProductView {
     }
 }
 */
+
+//Product(imagname: img, name: name, price: (String)price, bool: [wow,delivery,fresh])
+
+

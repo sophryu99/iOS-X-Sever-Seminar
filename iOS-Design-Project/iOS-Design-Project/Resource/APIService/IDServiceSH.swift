@@ -10,9 +10,10 @@ import Foundation
 import Alamofire
 import Kingfisher
 
-var toggle: Bool = true
+//var toggle: Bool = true
 struct IDServiceSH {
     // Singleton
+    
     static let idService = IDServiceSH()
 
     func getImage(completion: @escaping (NetworkResult<Any>) -> Void) {
