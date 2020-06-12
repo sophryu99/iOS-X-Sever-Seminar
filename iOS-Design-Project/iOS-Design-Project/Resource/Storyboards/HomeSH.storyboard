@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1266"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wHQ-sU-G0l" userLabel="BackgroundView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1293"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1281"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dw7-oO-pOW" userLabel="HeaderView">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="127"/>
@@ -159,10 +159,10 @@
                                                 </cells>
                                             </collectionView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="underLine1" translatesAutoresizingMaskIntoConstraints="NO" id="1S6-jn-XBo">
-                                                <rect key="frame" x="0.0" y="534" width="414" height="2"/>
+                                                <rect key="frame" x="0.0" y="535" width="414" height="1"/>
                                             </imageView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jUe-gm-ngy">
-                                                <rect key="frame" x="0.0" y="536" width="414" height="38"/>
+                                                <rect key="frame" x="0.0" y="537" width="414" height="38"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="38" id="l3G-WQ-gWw"/>
@@ -488,24 +488,24 @@
                                                 </prototypes>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="류세화님의 추천상품" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="erJ-VI-yfg">
-                                                <rect key="frame" x="14" y="594" width="105" height="17"/>
+                                                <rect key="frame" x="14" y="589" width="105" height="17"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rect1" translatesAutoresizingMaskIntoConstraints="NO" id="wCE-xT-hxM">
-                                                <rect key="frame" x="0.0" y="574" width="414" height="12"/>
+                                                <rect key="frame" x="0.0" y="575" width="414" height="6"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3jp-ei-jml">
-                                                <rect key="frame" x="363" y="589" width="43" height="27"/>
+                                                <rect key="frame" x="363" y="584" width="43" height="27"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <state key="normal" title="더보기 &gt;"/>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="underLine1" translatesAutoresizingMaskIntoConstraints="NO" id="qxn-WM-ITb">
-                                                <rect key="frame" x="0.0" y="616" width="414" height="2"/>
+                                                <rect key="frame" x="0.0" y="611" width="414" height="1"/>
                                             </imageView>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="edP-kE-OwB" userLabel="RecCollectionView">
-                                                <rect key="frame" x="0.0" y="619" width="414" height="187"/>
+                                                <rect key="frame" x="0.0" y="614" width="414" height="187"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="414" id="O4q-9i-anc"/>
@@ -596,24 +596,24 @@
                                                 </cells>
                                             </collectionView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rect1" translatesAutoresizingMaskIntoConstraints="NO" id="hRk-FC-T8S" userLabel="rect2">
-                                                <rect key="frame" x="0.0" y="806" width="414" height="12"/>
+                                                <rect key="frame" x="0.0" y="801" width="414" height="6"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="로켓프레쉬" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4y-bz-ata">
-                                                <rect key="frame" x="14" y="826" width="57" height="17"/>
+                                                <rect key="frame" x="14" y="815" width="57" height="17"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xH9-fe-vHP">
-                                                <rect key="frame" x="363" y="821" width="43" height="27"/>
+                                                <rect key="frame" x="363" y="810" width="43" height="27"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <state key="normal" title="더보기 &gt;"/>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="underLine1" translatesAutoresizingMaskIntoConstraints="NO" id="xvb-w2-nbQ">
-                                                <rect key="frame" x="0.0" y="850" width="414" height="2"/>
+                                                <rect key="frame" x="0.0" y="839" width="414" height="1"/>
                                             </imageView>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="V2D-Sf-B5x" userLabel="RocketCollectionView">
-                                                <rect key="frame" x="0.0" y="853" width="414" height="187"/>
+                                                <rect key="frame" x="0.0" y="842" width="414" height="187"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="414" id="hl8-hd-y0y"/>
@@ -700,21 +700,21 @@
                                                 </cells>
                                             </collectionView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rect2" translatesAutoresizingMaskIntoConstraints="NO" id="72j-Qn-D0u">
-                                                <rect key="frame" x="0.0" y="1028" width="414" height="12"/>
+                                                <rect key="frame" x="0.0" y="1023" width="414" height="6"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘의 특가" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wau-yn-IQ6">
-                                                <rect key="frame" x="14" y="1048" width="60" height="16"/>
+                                                <rect key="frame" x="14" y="1037" width="60" height="16"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xJS-cG-5yy">
-                                                <rect key="frame" x="367" y="1043" width="39" height="26"/>
+                                                <rect key="frame" x="367" y="1032" width="39" height="26"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <state key="normal" title="더보기 &gt;"/>
                                             </button>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xPa-Ee-GKc" userLabel="TodayCollectionView">
-                                                <rect key="frame" x="0.0" y="1076" width="414" height="187"/>
+                                                <rect key="frame" x="0.0" y="1064" width="414" height="187"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="187" id="RY2-am-tK4"/>
@@ -804,7 +804,7 @@
                                                 </cells>
                                             </collectionView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="underLine1" translatesAutoresizingMaskIntoConstraints="NO" id="4Mq-dk-dwS">
-                                                <rect key="frame" x="0.0" y="1071" width="414" height="2"/>
+                                                <rect key="frame" x="0.0" y="1060" width="414" height="1"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
