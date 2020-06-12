@@ -31,7 +31,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
             switch networkResult {
             case .success(let resultData):
                 
-                guard let data=resultData as? [ProductData] else {
+                guard let data=resultData as? [ProductDataTH] else {
                     return}
                 for index in 0..<data.count {
                     let item = Product(imagname: data[index].img, name: data[index].name, price: data[index].price, bool: [data[index].wow,data[index].fresh, data[index].delivery])

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProductCollectionViewCell1: UICollectionViewCell {
  
@@ -18,8 +19,12 @@ class ProductCollectionViewCell1: UICollectionViewCell {
     var index = 0
     
     func setProductInformation(Button_img: String, name: String, price: String, subinfo: [String]) {
+        print(">>")
         index = 0
-        proimg_but.setImage(UIImage(named: Button_img), for: .normal)
+        let url = URL(string:Button_img)
+        proimg_but.imageView?.kf.setImage(with: url)
+//        proimg_but.kf.setImage(with: url)
+//        proimg_but.setImage(UIImage(named: Button_img), for: .normal)
         pro_name.text = name
         pro_price.text = price
         for img in subinfo{

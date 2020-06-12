@@ -10,7 +10,7 @@ import Foundation
 struct HomeData_TH: Codable{
     var success : Bool
     var message : String
-    var data : [ProductData]
+    var data : [ProductDataTH]
     
     enum CodingKeys: String, CodingKey{
         case success = "success"
@@ -22,10 +22,10 @@ struct HomeData_TH: Codable{
         let values = try decoder.container(keyedBy: CodingKeys.self)
         success = (try? values.decode(Bool.self, forKey: .success)) ?? false
         message = (try? values.decode(String.self, forKey: .message)) ?? ""
-        data = (try? values.decode([ProductData].self, forKey: .data)) ?? [ProductData(id: 0, name: "", price: 0, wow: false, delivery: false, fresh: false, basket: false, img:URL(string: "")!, bannerimg: URL(string: "")!)]
+        data = (try? values.decode([ProductDataTH].self, forKey: .data)) ?? [ProductDataTH(id: 0, name: "", price: 0, wow: false, delivery: false, fresh: false, basket: false, img:URL(string: "")!, bannerimg: URL(string: "")!)]
     }
 }
-struct ProductData:Codable{
+struct ProductDataTH:Codable{
     var id:Int
     var name:String
     var price:Int

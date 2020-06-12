@@ -48,11 +48,11 @@ class TabBarController: UITabBarController {
         
         // Home Tab
         // 세화님 뷰
-        let homeStoryboard = UIStoryboard.init(name: "HomeSH", bundle: nil)
-        guard let thirdTab = homeStoryboard.instantiateViewController(identifier: "HomeSHVC")
-            as? HomeSHVC  else {
-            return
-        }
+//        let homeStoryboard = UIStoryboard.init(name: "HomeSH", bundle: nil)
+//        guard let thirdTab = homeStoryboard.instantiateViewController(identifier: "HomeSHVC")
+//            as? HomeSHVC  else {
+//            return
+//        }
         // 태훈님 뷰
 //         let homeStoryboard = UIStoryboard.init(name: "HomeExample", bundle: nil)
 //         guard let thirdTab = homeStoryboard.instantiateViewController(identifier: "HomeExVC")
@@ -60,9 +60,9 @@ class TabBarController: UITabBarController {
 //             return
 //         }
         // 유진님 뷰
-//        let homeStoryboard = UIStoryboard.init(name: "YJHome", bundle: nil)
-//        let thirdTab = homeStoryboard.instantiateViewController(identifier: "YJHomeNavi")
-//
+        let homeStoryboard = UIStoryboard.init(name: "YJHome", bundle: nil)
+        let thirdTab = homeStoryboard.instantiateViewController(identifier: "YJHomeNavi")
+
 
         thirdTab.tabBarItem.title = ""
         thirdTab.tabBarItem.image = UIImage(named: "iconHome")?.withRenderingMode(.alwaysOriginal)

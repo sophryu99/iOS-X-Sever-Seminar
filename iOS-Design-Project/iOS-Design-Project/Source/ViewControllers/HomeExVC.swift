@@ -10,7 +10,7 @@ import UIKit
 
 class HomeExVC: UIViewController {
     /// 상단 Banner
-    var ProductInformation:[ProductData] = []
+    var ProductInformation:[ProductDataTH] = []
     
     var urls:[URL] = []
     var rankingName:[String] = []
@@ -23,7 +23,7 @@ class HomeExVC: UIViewController {
             switch networkResult {
             case .success(let resultData):
                 
-                guard let data=resultData as? [ProductData] else {
+                guard let data=resultData as? [ProductDataTH] else {
                     return}
                 for index in 0..<data.count {
                     self.urls.append(data[index].bannerimg)
