@@ -43,6 +43,7 @@ class HomeSHVC: UIViewController {
     var productNames: [String] = []
     var productPrices: [Int] = []
     var urlInformation: [AdsSH] = []
+    var productURLInformation: [RecSH] = []
     
     // 인기 검색어
     var rankingName:[String] = []
@@ -71,7 +72,7 @@ class HomeSHVC: UIViewController {
         CatCollectionView.showsHorizontalScrollIndicator = false
 
         // RecCollectionView
-        setRecList()
+        //setRecList()
         setRecView()
         RecCollectionView.delegate = self
         RecCollectionView.dataSource = self
@@ -99,21 +100,20 @@ class HomeSHVC: UIViewController {
         popularTableView.delegate = self
         popularTableView.dataSource = self
         
-        // 대박!!!!!
+        // 광고 배너
         getURLBanner()
-               DispatchQueue.main.async {
-                   self.AdCollectionView.reloadData()
-               }
-        
+        DispatchQueue.main.async {
+            self.AdCollectionView.reloadData()
+        }
+        getURLProduct()
+        DispatchQueue.main.async {
+            self.RecCollectionView.reloadData()
+        }
 
     }
         
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // Banner
-       
-        // 상품 카테고리
-        getURLProduct()
 
     }
 
@@ -152,22 +152,28 @@ class HomeSHVC: UIViewController {
     // 상품 이미지 통신
     func getURLProduct(){
         IDServiceSH.idService.getImage() { networkResult in
+            var productImage : [RecSH] = []
+            //var productName : [RecSH] = []
+            var recommend:[RecSH] = []
+            var rocketFresh:[RecSH] = []
+            var todayPrice:[RecSH] = []
             switch networkResult {
             case .success(let resultData):
 
                 guard let data = resultData as? [ImageData] else {
                     return}
                 for index in 0..<data.count {
-                    //self.urls.append(data[index].img)
-                    self.productNames.append(data[index].name)
-                    self.productPrices.append(data[index].price)
+                    let item = RecSH(imagename: data[index].img, name: data[index].name, price: data[index].price, rocket: data[index].wow, fresh: data[index].fresh, delivery: data[index].delivery)
+                    productImage.append(item)
+                    recommend.append(item)
+                    rocketFresh.append(item)
+                    todayPrice.append(item)
                 }
+                self.productURLInformation = productImage
                 print("Success2")
-                print(self.urls)
-                print(self.productNames)
-                print(self.productPrices)
-                self.ProductInformation = data
-                
+                print(self.productURLInformation[0])
+                //self.ProductInformation = data
+
             case .pathErr : print("Patherr")
             case .serverErr : print("ServerErr")
             case .requestErr(let message) : print(message)
@@ -268,18 +274,18 @@ class HomeSHVC: UIViewController {
          CatCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
     }
     
-    private func setRecList() {
-        let image1 = RecSH(imageName: "img1", productName: "[보랄] 더 셰프 인덕션", price: "51,900원", rWow: "badgeRoketwow", rFresh: "badgeRoketfresh", rDeliver: "badgeRoketdelivery")
-        let image2 = RecSH(imageName: "img2", productName: "고구마는 원래 노랗다", price: "51,900원", rWow: "badgeRoketwow", rFresh: "badgeRoketfresh", rDeliver: "")
-        let image3 = RecSH(imageName: "img3", productName: "[해찬들] 국산 고추장", price: "31,900원", rWow: "badgeRoketwow", rFresh: "badgeRoketfresh", rDeliver: "")
-        let image4 = RecSH(imageName: "img4", productName: "면도기", price: "71,900원", rWow: "badgeRoketwow", rFresh: "badgeRoketfresh", rDeliver: "")
-        let image5 = RecSH(imageName: "img5", productName: "[보랄] 더 셰프 인덕션", price: "51,900원", rWow: "badgeRoketwow", rFresh: "badgeRoketfresh", rDeliver: "")
-        let image6 = RecSH(imageName: "img6", productName: "건강 샐러드", price: "8,900원", rWow: "badgeRoketwow", rFresh: "badgeRoketfresh", rDeliver: "")
-        let image7 = RecSH(imageName: "img7", productName: "고구마는 원래 노랗다", price: "51,900원", rWow: "badgeRoketwow", rFresh: "", rDeliver: "")
-        let image8 = RecSH(imageName: "img8", productName: "[보랄] 더 셰프 인덕션", price: "11,900원", rWow: "", rFresh: "badgeRoketfresh", rDeliver: "")
-        
-        recList = [image1, image2, image3, image4, image5, image6, image7, image8]
-    }
+//    private func setRecList() {
+//        let image1 = RecSH(imageName: "img1", productName: "[보랄] 더 셰프 인덕션", price: "51,900원", rWow: "badgeRoketwow", rFresh: "badgeRoketfresh", rDeliver: "badgeRoketdelivery")
+//        let image2 = RecSH(imageName: "img2", productName: "고구마는 원래 노랗다", price: "51,900원", rWow: "badgeRoketwow", rFresh: "badgeRoketfresh", rDeliver: "")
+//        let image3 = RecSH(imageName: "img3", productName: "[해찬들] 국산 고추장", price: "31,900원", rWow: "badgeRoketwow", rFresh: "badgeRoketfresh", rDeliver: "")
+//        let image4 = RecSH(imageName: "img4", productName: "면도기", price: "71,900원", rWow: "badgeRoketwow", rFresh: "badgeRoketfresh", rDeliver: "")
+//        let image5 = RecSH(imageName: "img5", productName: "[보랄] 더 셰프 인덕션", price: "51,900원", rWow: "badgeRoketwow", rFresh: "badgeRoketfresh", rDeliver: "")
+//        let image6 = RecSH(imageName: "img6", productName: "건강 샐러드", price: "8,900원", rWow: "badgeRoketwow", rFresh: "badgeRoketfresh", rDeliver: "")
+//        let image7 = RecSH(imageName: "img7", productName: "고구마는 원래 노랗다", price: "51,900원", rWow: "badgeRoketwow", rFresh: "", rDeliver: "")
+//        let image8 = RecSH(imageName: "img8", productName: "[보랄] 더 셰프 인덕션", price: "11,900원", rWow: "", rFresh: "badgeRoketfresh", rDeliver: "")
+//
+//        recList = [image1, image2, image3, image4, image5, image6, image7, image8]
+//    }
     
     // RecCollectionView 설정
     private func setRecView() {
@@ -394,7 +400,7 @@ extension HomeSHVC: UICollectionViewDataSource, UICollectionViewDelegate {
         } else if collectionView == self.CatCollectionView {
             return catImageList.count/2
         } else if collectionView == self.RecCollectionView {
-            return recList.count
+            return productURLInformation.count
         } else if collectionView == self.RocketCollectionView {
             return rocketList.count
         } else {
@@ -404,17 +410,12 @@ extension HomeSHVC: UICollectionViewDataSource, UICollectionViewDelegate {
     
     
     // CollectionView IndexPath 별 Cell 지정
+    // 서버 통신 Cell 연결
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.AdCollectionView {
             guard let adCell = collectionView.dequeueReusableCell(withReuseIdentifier: AdCellSH.identifier, for: indexPath) as? AdCellSH else { return UICollectionViewCell()}
             adCell.adImageView.setImage(path: urlInformation[indexPath.row].imageName)
             adCell.adImageView.contentMode = UIView.ContentMode.scaleAspectFill
-
-            //adCell.set(adImageList[indexPath.row])
-            //for index in 0..<urlInformation.count {
-                //print(urlInformation[index])
-                //adCell.adImageView.imageFromUrl(urlInformation.imageName[index], defaultImgPath: "ad1")
-            //adCell.adImageView.imageFromUrl(self.urls[0], defaultImgPath: "ad1")
             return adCell
         } else if collectionView == self.CatCollectionView {
             guard let catCell = collectionView.dequeueReusableCell(withReuseIdentifier: CatCellSH.identifier, for: indexPath) as? CatCellSH else { return UICollectionViewCell()}
@@ -422,10 +423,20 @@ extension HomeSHVC: UICollectionViewDataSource, UICollectionViewDelegate {
             return catCell
         } else if collectionView == self.RecCollectionView {
             guard let recCell = collectionView.dequeueReusableCell(withReuseIdentifier: RecCellSH.identifier, for: indexPath) as? RecCellSH else { return UICollectionViewCell()}
-            recCell.set(recList[indexPath.row])
-            //recCell.productImage.image = recInformation.imageName
-            //recCell.productName.text = self.productNames[0]
-            //recCell.productPrice.int = self.productPrices[0]
+            recCell.productImage.setImage(path: productURLInformation[indexPath.row].productImageName)
+            recCell.productName.text = productURLInformation[indexPath.row].ProductName
+            recCell.productPrice.text = productURLInformation[indexPath.row].ProductPrice + " 원"
+            if productURLInformation[indexPath.row].rocket == true {
+                recCell.rocketWow.image = UIImage(named: "badgeRoketdelivery")
+            }
+            if productURLInformation[indexPath.row].fresh == true {
+                recCell.rocketFresh.image = UIImage(named: "badgeRoketfresh")
+            }
+            if productURLInformation[indexPath.row].delivery == true {
+                recCell.rocketDelivery.image = UIImage(named: "badgeRoketwow")
+            }
+            
+            
             return recCell
         } else if collectionView == self.RocketCollectionView{
             guard let rocketCell = collectionView.dequeueReusableCell(withReuseIdentifier: RocketCellSH.identifier, for: indexPath) as? RocketCellSH else { return UICollectionViewCell()}
@@ -560,7 +571,6 @@ extension HomeSHVC: UITableViewDelegate, UITableViewDataSource {
                     UIView.animate(withDuration: 0.5) {
                         self.view.layoutIfNeeded()
                     }
-
                 } else {
                     items[indexPath.section].open = true
                     IDServiceSH.idService.getTrending() { networkResult in
@@ -611,21 +621,7 @@ extension UIImageView {
 }
 
 
-//// Kingfisher를 이용하여 url로부터 이미지를 가져오는 extension
-//extension UIImageView {
-//    public func imageFromUrl(_ urlString: String?, defaultImgPath : String) {
-//        let defaultImg = UIImage(named: defaultImgPath)
-//        if let url = urlString {
-//            if url.isEmpty {
-//                self.image = defaultImg
-//            } else {
-//                self.kf.setImage(with: URL(string: url), placeholder: defaultImg, options: [.transition(ImageTransition.fade(0.5))])
-//            }
-//        } else {
-//            self.image = defaultImg
-//        }
-//    }
-//}
+
 
 
 
