@@ -60,6 +60,8 @@
 		7FB929912487A33300798CC2 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB929902487A33300798CC2 /* UIImageView+Extension.swift */; };
 		AE97AC4624888FCA0007E6CF /* YJSearchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE97AC4524888FCA0007E6CF /* YJSearchData.swift */; };
 		AE97AC48248899790007E6CF /* YJSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE97AC47248899790007E6CF /* YJSearchService.swift */; };
+		AE97AC4A24893C560007E6CF /* YJItemsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE97AC4924893C560007E6CF /* YJItemsData.swift */; };
+		AE97AC4C24893D520007E6CF /* YJItemsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE97AC4B24893D520007E6CF /* YJItemsService.swift */; };
 		AEBB68CC247E3AC400008A5C /* YJHome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEBB68CB247E3AC400008A5C /* YJHome.storyboard */; };
 		AEBB68CE247E3B0400008A5C /* YJHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB68CD247E3B0400008A5C /* YJHomeVC.swift */; };
 		AEBB68D6247F6ABA00008A5C /* ProductInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB68D5247F6ABA00008A5C /* ProductInfo.swift */; };
@@ -130,6 +132,8 @@
 		7FB929902487A33300798CC2 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		AE97AC4524888FCA0007E6CF /* YJSearchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YJSearchData.swift; sourceTree = "<group>"; };
 		AE97AC47248899790007E6CF /* YJSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YJSearchService.swift; sourceTree = "<group>"; };
+		AE97AC4924893C560007E6CF /* YJItemsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YJItemsData.swift; sourceTree = "<group>"; };
+		AE97AC4B24893D520007E6CF /* YJItemsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YJItemsService.swift; sourceTree = "<group>"; };
 		AEBB68CB247E3AC400008A5C /* YJHome.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = YJHome.storyboard; sourceTree = "<group>"; };
 		AEBB68CD247E3B0400008A5C /* YJHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YJHomeVC.swift; sourceTree = "<group>"; };
 		AEBB68D5247F6ABA00008A5C /* ProductInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInfo.swift; sourceTree = "<group>"; };
@@ -190,6 +194,8 @@
 				7F79F745247A543B00B9FC56 /* Resource */,
 				7F79F741247A540600B9FC56 /* Source */,
 				7F79F73B247A53FC00B9FC56 /* Info.plist */,
+				AE97AC4924893C560007E6CF /* YJItemsData.swift */,
+				AE97AC4B24893D520007E6CF /* YJItemsService.swift */,
 				AE97AC4524888FCA0007E6CF /* YJSearchData.swift */,
 				AE97AC47248899790007E6CF /* YJSearchService.swift */,
 				010A5CA9247FEC180081CD0B /* RocketCellSH.swift */,
@@ -482,6 +488,7 @@
 				AE97AC48248899790007E6CF /* YJSearchService.swift in Sources */,
 				7F79F762247A652B00B9FC56 /* UIColor+Additions.swift in Sources */,
 				DAF6DC8624812F42003AEEF0 /* InnerProductCollectionViewCell.swift in Sources */,
+				AE97AC4C24893D520007E6CF /* YJItemsService.swift in Sources */,
 				AEBB68D8247F71F400008A5C /* ProductCollectionViewCell1.swift in Sources */,
 				7F79F75C247A5B6500B9FC56 /* PersonalInfoVC.swift in Sources */,
 				7FA31E04248252F20069625D /* ProductPriceDetailCellJH.swift in Sources */,
@@ -499,6 +506,7 @@
 				DADE508B247FBB4200E45A36 /* ProductCollectionViewCell.swift in Sources */,
 				AEBB68D6247F6ABA00008A5C /* ProductInfo.swift in Sources */,
 				7F79F74A247A550900B9FC56 /* TabBarController.swift in Sources */,
+				AE97AC4A24893C560007E6CF /* YJItemsData.swift in Sources */,
 				019FBC5A247E339F00A3FB2B /* CatSH.swift in Sources */,
 				019FBC5C247EC63200A3FB2B /* RecSH.swift in Sources */,
 				7F79F771247E65D400B9FC56 /* ShoppingBasketJHVC.swift in Sources */,

@@ -8,6 +8,8 @@
 
 import UIKit
 import FSPagerView
+import Kingfisher
+import Alamofire
 
 class YJHomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource {
     
@@ -80,9 +82,9 @@ class YJHomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate,UICol
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         
         search()
+        setproductinfo()
         
         user.text = username + "님의 추천상품"
         
@@ -98,8 +100,6 @@ class YJHomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate,UICol
         setNavi()
         setPager()
         setSearchbar()
-        setproductinfo()
-       
         // Do any additional setup after loading the view.
     }
     
@@ -259,20 +259,22 @@ class YJHomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate,UICol
         }
     }
     
+   
     //하단 collectionview에 띄울 상품 세팅
     private func setproductinfo(){
-        let product1 = ProductInfo(mainimg: "img1", name: "[보랄] 더셰프 인덕션", price: "51,900원", subinfo: [true,true,true])
-        let product2 = ProductInfo(mainimg: "img2", name: "고구마는 원래 노랗다", price: "21,900원", subinfo: [false,true,true])
-        let product3 = ProductInfo(mainimg: "img3", name: "[해찬들] 국산 고추장", price: "31,900원", subinfo: [true,false,true])
-        let product4 = ProductInfo(mainimg: "img4", name: "면도기", price: "71,900원", subinfo: [true,false,false])
+//        let product1 = ProductInfo(mainimg: "img1", name: "[보랄] 더셰프 인덕션", price: "51,900원", subinfo: [true,true,true])
+//        let product2 = ProductInfo(mainimg: "img2", name: "고구마는 원래 노랗다", price: "21,900원", subinfo: [false,true,true])
+//        let product3 = ProductInfo(mainimg: "img3", name: "[해찬들] 국산 고추장", price: "31,900원", subinfo: [true,false,true])
+//        let product4 = ProductInfo(mainimg: "img4", name: "면도기", price: "71,900원", subinfo: [true,false,false])
         
         let product5 = ProductInfo(mainimg: "img9", name: "[보랄] 더셰프 인덕션", price: "51,900원", subinfo: [true,true,false])
         let product6 = ProductInfo(mainimg: "img6", name: "고구마는 원래 노랗다", price: "21,900원", subinfo: [true,false,true])
         let product7 = ProductInfo(mainimg: "img7", name: "[해찬들] 국산 고추장", price: "31,900원", subinfo: [true,true,true])
         let product8 = ProductInfo(mainimg: "img8", name: "면도기", price: "71,900원", subinfo: [false,true,false])
+
+//        self.products = [product1,product2,product3,product4] //맞춤상품에 띄울
+        self.products2 = [product5,product6,product7,product8] //로켓프레쉬에 띄울
         
-        products = [product1,product2,product3,product4] //맞춤상품에 띄울
-        products2 = [product5,product6,product7,product8] //로켓프레쉬에 띄울
     }
     
     //collection뷰 셀 개수
@@ -283,6 +285,37 @@ class YJHomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate,UICol
         else{
             return products2.count
         }
+    }
+    
+    func productset(){
+        YJItemsService.shared.makeitems() { networkResult in
+                            switch networkResult {
+                            case .success(let products):
+                                guard let items = products as? [itemData] else { return }
+                                for i in 0..<4{
+                                    var dataset = ProductInfo(mainimg: "", name: "", price: "", subinfo: [false,false,false])
+                                    dataset.name = items[i].name
+                                    dataset.price = String(items[i].price)
+                                    dataset.subinfo[0] = items[i].wow
+                                    dataset.subinfo[1] = items[i].fresh
+                                    dataset.subinfo[2] = items[i].delivery
+                                    dataset.mainimg = items[i].img
+                
+                                    self.products.append(dataset)
+                                    print(self.products)
+                                }
+                            case .requestErr(let message):
+                                guard let message = message as? String else { return }
+                                let alertViewController = UIAlertController(title: "상품 조회 실패", message: message, preferredStyle: .alert)
+                                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                                alertViewController.addAction(action)
+                                self.present(alertViewController, animated: true, completion: nil)
+                            case .pathErr: print("path")
+                            case .serverErr: print("serverErr")
+                            case .networkFail: print("networkFail")
+
+                            }
+                        }
     }
     
     //collectionView 셀 내용
